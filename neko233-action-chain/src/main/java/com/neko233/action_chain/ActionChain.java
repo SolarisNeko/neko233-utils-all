@@ -73,7 +73,7 @@ public class ActionChain {
     }
 
     public ActionChain retry(int count, int retryIntervalSecond) {
-        retryCount = count;
+        retryCount = Math.min(count, maxRetryTime);
         this.retryIntervalSecond = retryIntervalSecond;
         return this;
     }

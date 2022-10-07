@@ -7,7 +7,7 @@ import org.junit.Test;
 public class ActionChainTest {
 
     @Test
-    public void testExecute() throws Exception {
+    public void testRecursiveRetry() throws Exception {
         log.info("----Demo--------");
 
         ActionChain.create()
@@ -25,7 +25,7 @@ public class ActionChainTest {
                 .doFinally(() -> {
                     System.out.println("finally end.");
                 })
-                .retry(10, 3)
+                .retry(2, 3)
                 .closable(null)
                 .execute();
     }
