@@ -26,8 +26,7 @@ public class ActionChainTest {
                     System.out.println("finally end.");
                 })
                 .retry(10, 3)
-                .closable(() -> {
-                })
+                .closable(null)
                 .execute();
     }
 

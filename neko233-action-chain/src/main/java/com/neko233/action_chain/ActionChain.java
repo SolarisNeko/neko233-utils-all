@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -26,11 +27,13 @@ public class ActionChain {
     /**
      * 最大重试次数
      */
-    private final int maxRetryTime = 100;
+    private final int maxRetryTime = 100_0000;
 
     private final List<ExecuteAction> actionList = new LinkedList<>();
     private final List<ExceptionAction> handleExceptionChain = new LinkedList<>();
     private final List<FinallyAction> finallyActionChain = new LinkedList<>();
+
+    private final List<Throwable> rememberThrowableList = new ArrayList<>();
 
     private ActionChain() {
 
@@ -38,6 +41,14 @@ public class ActionChain {
 
     public static ActionChain create() {
         return new ActionChain();
+    }
+
+    /**
+     * 获取抛出的所有异常
+     * @return 处理过的异常列表
+     */
+    public List<Throwable> getRememberThrowableList() {
+        return rememberThrowableList;
     }
 
     public ActionChain success(ExecuteAction action) {
@@ -67,30 +78,39 @@ public class ActionChain {
         return this;
     }
 
-    public ActionChain closable(AtomicReference<Closeable> atomicRef) {
-        if (atomicRef == null) {
+    /**
+     * 配置 closable field
+     * @return this
+     */
+    public ActionChain closable(Closeable closeable) {
+        if (closeable == null) {
             return this;
         }
-        closable(atomicRef.get());
+        try {
+            closeable.close();
+        } catch (IOException e) {
+            handleExceptionInChain("closable", e);
+        }
         return this;
     }
 
-    public ActionChain closable(Closeable closeable) {
-        finallyActionChain.add(() -> {
-            try {
-                if (closeable == null) {
-                    return;
-                }
-                closeable.close();
-            } catch (IOException e) {
-                log.error("Closable close error.", e);
 
-                for (ExceptionAction exceptionAction : handleExceptionChain) {
-                    exceptionAction.handleException(e);
-                }
+    /**
+     * 链式处理 Exception
+     *
+     * @param e 异常
+     */
+    private void handleExceptionInChain(String stage, Throwable e) {
+        // record
+        rememberThrowableList.add(e);
+
+        log.debug("[ActionChain] stage = [ {} ], handle exception.", stage);
+        for (ExceptionAction action : handleExceptionChain) {
+            if (action == null) {
+                continue;
             }
-        });
-        return this;
+            action.handleException(e);
+        }
     }
 
     public void execute() {
@@ -105,20 +125,13 @@ public class ActionChain {
             if (!isHandleException) {
                 return;
             }
-            for (ExceptionAction exceptionAction : handleExceptionChain) {
-                if (exceptionAction == null) {
-                    continue;
-                }
-                exceptionAction.handleException(e);
-            }
+            handleExceptionInChain("execute", e);
         } finally {
             for (FinallyAction finallyAction : finallyActionChain) {
                 try {
                     finallyAction.doFinally();
                 } catch (Exception e) {
-                    for (ExceptionAction exceptionAction : handleExceptionChain) {
-                        exceptionAction.handleException(e);
-                    }
+                    handleExceptionInChain("finally", e);
                 }
             }
         }
