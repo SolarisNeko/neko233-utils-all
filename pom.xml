@@ -12,7 +12,7 @@
     </modules>
 
     <name>neko233-utils-all</name>
-    <url>https://github.com/SolarisNeko/sql-light-rail/tree/main</url>
+    <url>https://github.com/SolarisNeko/neko233-utils-all/tree/main</url>
 
     <description>
         neko233-utils-all is used to resolve common problem.
@@ -31,9 +31,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/SolarisNeko/sql-light-rail.git</connection>
-        <developerConnection>scm:git:ssh://github.com/SolarisNeko/sql-light-rail.git</developerConnection>
-        <url>http://github.com/SolarisNeko/sql-light-rail/tree/main</url>
+        <connection>scm:git:https://github.com/SolarisNeko/neko233-utils-all.git</connection>
+        <developerConnection>scm:git:ssh://github.com/SolarisNeko/neko233-utils-all.git</developerConnection>
+        <url>http://github.com/SolarisNeko/neko233-utils-all/tree/main</url>
     </scm>
 
     <licenses>
