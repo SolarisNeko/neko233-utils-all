@@ -12,3 +12,19 @@
 自己额外扩展:
 1. action-chain 行为链编程
 2. dispatcher-with-delegate 委托方式的分发中心
+
+
+# Use
+## maven
+```xml
+<dependency>
+   <groupId>com.neko233</groupId>
+   <artifactId>neko233-utils-all</artifactId>
+   <version>0.0.2</version>
+</dependency>
+```
+
+## Gradle
+```kotlin
+
+```
