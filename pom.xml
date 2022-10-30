@@ -6,7 +6,7 @@
     <groupId>com.neko233</groupId>
     <artifactId>neko233-utils-all</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <modules>
         <module>neko233-action-chain</module>
     </modules>
@@ -17,6 +17,7 @@
     <description>
         neko233-utils-all is used to resolve common problem.
         用于解决常见问题.
+        开箱即用的一些工具包、依赖.
     </description>
 
     <developers>
@@ -60,14 +61,14 @@
     <dependencies>
 
 
-        <!-- Log -->
+        <!-- Log Facade -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-api.version}</version>
             <scope>compile</scope>
         </dependency>
-        <!-- 打包不引入实现 -->
+        <!-- not provide, just use to test -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -80,9 +81,16 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
-            <optional>true</optional>
             <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
+        <!-- Google -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.0-jre</version>
+        </dependency>
+        <!-- Apache -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -92,6 +100,13 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>4.4</version>
+        </dependency>
+
+        <!-- Serialize -->
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>2.0.15</version>
         </dependency>
 
         <!-- Test -->
@@ -166,7 +181,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <!--                            <goal>jar</goal>-->
+                            <!-- <goal>jar</goal>-->
                             <goal>test-jar</goal>
                         </goals>
                     </execution>

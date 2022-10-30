@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author LuoHaoJun on 2022-09-30
@@ -45,6 +44,7 @@ public class ActionChain {
 
     /**
      * 获取抛出的所有异常
+     *
      * @return 处理过的异常列表
      */
     public List<Throwable> getRememberThrowableList() {
@@ -80,6 +80,7 @@ public class ActionChain {
 
     /**
      * 配置 closable field
+     *
      * @return this
      */
     public ActionChain closable(Closeable closeable) {
