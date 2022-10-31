@@ -5,12 +5,12 @@
     <packaging>jar</packaging>
 
     <parent>
-        <artifactId>neko233-utils-all</artifactId>
         <groupId>com.neko233</groupId>
-        <version>0.0.3</version>
+        <artifactId>neko233-utils-all</artifactId>
+        <version>0.0.4</version>
     </parent>
 
-    <artifactId>neko233-action-chain</artifactId>
+    <artifactId>neko233-dispatcher-with-delegate</artifactId>
     <name>neko233-dispatcher-with-delegate</name>
     <description>委托的调度分发中心.</description>
 

@@ -5,14 +5,14 @@
     <packaging>jar</packaging>
 
     <parent>
-        <artifactId>neko233-utils-all</artifactId>
         <groupId>com.neko233</groupId>
+        <artifactId>neko233-utils-all</artifactId>
         <version>0.0.4</version>
     </parent>
 
-    <artifactId>neko233-action-chain</artifactId>
-    <name>neko233-action-chain</name>
-    <description>行为链式处理 Lambda Style</description>
+    <artifactId>common-util</artifactId>
+    <name>common-util</name>
+    <description>通用工具.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
