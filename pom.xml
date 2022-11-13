@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>neko233-action-chain</module>
+        <module>neko233-dispatcher-with-delegate</module>
     </modules>
 
     <name>neko233-utils-all</name>
@@ -24,10 +25,6 @@
         <developer>
             <name>SolarisNeko</name>
             <url>https://github.com/SolarisNeko</url>
-        </developer>
-        <developer>
-            <name>Emmett Woo</name>
-            <url>https://github.com/Emmettwoo</url>
         </developer>
     </developers>
 
@@ -46,7 +43,8 @@
 
 
     <properties>
-        <java.version>8</java.version>
+        <java.version>11</java.version>
+<!--        <java.version>8</java.version>-->
         <github.global.server>github</github.global.server>
         <maven.compiler.source>1.8</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -289,8 +287,11 @@
                 <version>3.8.1</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
+
+                    <!--                    <source>1.8</source>-->
+                    <!--                    <target>1.8</target>-->
                 </configuration>
             </plugin>
         </plugins>
