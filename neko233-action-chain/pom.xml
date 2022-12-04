@@ -7,7 +7,7 @@
     <parent>
         <artifactId>neko233-utils-all</artifactId>
         <groupId>com.neko233</groupId>
-        <version>0.0.4</version>
+        <version>0.0.5</version>
     </parent>
 
     <artifactId>neko233-action-chain</artifactId>
