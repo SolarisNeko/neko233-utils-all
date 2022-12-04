@@ -1,7 +1,5 @@
 package com.neko233.pool;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -31,7 +29,7 @@ public class MyThreadPoolFactory {
                     private final AtomicInteger counter = new AtomicInteger(1);
 
                     @Override
-                    public Thread newThread(@NotNull Runnable r) {
+                    public Thread newThread(Runnable r) {
                         if (r == null) {
                             throw new NullPointerException();
                         }
