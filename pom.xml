@@ -43,7 +43,7 @@
 
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
 <!--        <java.version>8</java.version>-->
         <github.global.server>github</github.global.server>
         <maven.compiler.source>1.8</maven.compiler.source>
