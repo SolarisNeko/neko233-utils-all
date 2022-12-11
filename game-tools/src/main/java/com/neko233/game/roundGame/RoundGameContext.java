@@ -1,13 +1,12 @@
 package com.neko233.game.roundGame;
 
 import com.google.common.collect.Lists;
+import com.neko233.game.common.Player;
+import com.neko233.game.roundGame.command.RoundCommand;
 import com.neko233.game.roundGame.fsm.RoundFsm;
 import lombok.Data;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -20,21 +19,23 @@ import java.util.stream.Collectors;
 public class RoundGameContext {
 
 
-    private final Map<String, List<RoundActor>> groupMap = new HashMap<>(); // 分队伍的棋子
+    private final List<Player> players; // 分队伍的棋子
+    private final Map<Long, List<RoundActor>> userIdMap = new HashMap<>(); // 分队伍的棋子
     // state
     private Long maxSpeed; // 行动条
     private final List<RoundActor> actionLink = new LinkedList<>(); // 行动条
     private RoundFsm fsm; // 全局游戏状态
 
 
-    public RoundGameContext(List<RoundActor> allActorList) {
-        Map<String, List<RoundActor>> collect = allActorList.stream()
-                .collect(Collectors.toMap(RoundActor::getGroup, Lists::newArrayList, (v1, v2) -> {
+    public RoundGameContext(List<Player> players, List<RoundActor> allActorList) {
+        this.players = players;
+        Map<Long, List<RoundActor>> userIdMap = allActorList.stream()
+                .collect(Collectors.toMap(RoundActor::getUserId, Lists::newArrayList, (v1, v2) -> {
                             v1.addAll(v2);
                             return v1;
                         }
                 ));
-        this.groupMap.putAll(collect);
+        this.userIdMap.putAll(userIdMap);
 
         // 生成默认进度条
         List<RoundActor> speedSortLinkedList = allActorList.stream()
@@ -47,13 +48,20 @@ public class RoundGameContext {
                 })
                 .collect(Collectors.toList());
         actionLink.addAll(speedSortLinkedList);
-        RoundActor firstSpeedActor = speedSortLinkedList.stream().findFirst().orElseThrow(() -> {
-            throw new RuntimeException("not found the action chain first element ");
-        });
-        maxSpeed = firstSpeedActor.getSpeed();
+        try {
+            RoundActor firstSpeedActor = speedSortLinkedList.get(0);
+            maxSpeed = firstSpeedActor.getSpeed();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        fsm = new RoundFsm(collect.keySet());
+        fsm = new RoundFsm(new ArrayList<>(userIdMap.keySet()));
     }
+
+    public void command(RoundCommand command) {
+
+    }
+
 
     /**
      * 开始游戏

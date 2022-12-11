@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RoundActor {
 
-    private String group;
+    private Long userId;
     private Integer petId;
     private String name;
     private Long hp;
