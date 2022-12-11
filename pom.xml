@@ -10,6 +10,7 @@
     <modules>
         <module>neko233-action-chain</module>
         <module>neko233-dispatcher-with-delegate</module>
+        <module>game-tools</module>
     </modules>
 
     <name>neko233-utils-all</name>
@@ -40,7 +41,6 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-
 
     <properties>
         <java.version>8</java.version>
