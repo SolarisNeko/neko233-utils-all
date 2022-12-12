@@ -25,5 +25,4 @@ public class RoundActor {
     private Long defend;
     private Long speed;
 
-
 }

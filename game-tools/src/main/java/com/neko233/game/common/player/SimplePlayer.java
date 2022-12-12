@@ -1,4 +1,4 @@
-package com.neko233.game.common;
+package com.neko233.game.common.player;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,10 +16,18 @@ import lombok.NoArgsConstructor;
 public class SimplePlayer implements Player {
 
     private Long userId;
+    private String inputBody;
 
 
     @Override
     public Long userId() {
         return userId;
+    }
+
+    @Override
+    public String inputBody() {
+        String bodyClone = inputBody;
+        this.inputBody = null;
+        return bodyClone;
     }
 }

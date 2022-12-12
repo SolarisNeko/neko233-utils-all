@@ -1,10 +1,10 @@
 package com.neko233.game.roundGame;
 
 import com.google.common.collect.Lists;
-import com.neko233.game.common.Player;
-import com.neko233.game.roundGame.command.RoundCommand;
-import com.neko233.game.roundGame.fsm.RoundFsm;
+import com.neko233.game.common.player.Player;
+import com.neko233.game.roundGame.command.*;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,19 +15,22 @@ import java.util.stream.Collectors;
  * @author SolarisNeko
  * Date on 2022-12-11
  */
+@Slf4j
 @Data
 public class RoundGameContext {
 
-
+    private Boolean isFinish;
     private final List<Player> players; // 分队伍的棋子
     private final Map<Long, List<RoundActor>> userIdMap = new HashMap<>(); // 分队伍的棋子
     // state
     private Long maxSpeed; // 行动条
     private final List<RoundActor> actionLink = new LinkedList<>(); // 行动条
-    private RoundFsm fsm; // 全局游戏状态
+    private List<Long> joinUserIdList; // 参与的玩家列表
+    private Long currentOperateUserId; // 全局游戏状态
 
 
     public RoundGameContext(List<Player> players, List<RoundActor> allActorList) {
+        this.isFinish = false;
         this.players = players;
         Map<Long, List<RoundActor>> userIdMap = allActorList.stream()
                 .collect(Collectors.toMap(RoundActor::getUserId, Lists::newArrayList, (v1, v2) -> {
@@ -55,37 +58,46 @@ public class RoundGameContext {
             throw new RuntimeException(e);
         }
 
-        fsm = new RoundFsm(new ArrayList<>(userIdMap.keySet()));
+        joinUserIdList = new ArrayList<>(userIdMap.keySet());
+        currentOperateUserId = joinUserIdList.get(0);
     }
-
-    public void command(RoundCommand command) {
-
-    }
-
 
     /**
-     * 开始游戏
+     * 周期回合链路
      */
-    public void startGame() {
-        fsm.start();
-    }
+    private List<RoundCommand> roundCommandChain = Lists.newArrayList(
+            new RoundPreStartCommand(),
+            new RoundStartCommand(),
+            new RoundPostStartCommand(),
+            new RoundMiddleCommand(),
+            new RoundPreStopCommand(),
+            new RoundStopCommand(),
+            new RoundPostStopCommand()
+    );
 
-    public void update() {
-        if (fsm.getIsFinish()) {
-            notifyGameStop();
-            return;
+    /**
+     * 游戏调度
+     */
+    public void scheduleGame() {
+        try {
+            new GameBeginCommand().execute(this);
+
+            // lifecycle
+            for (RoundCommand roundCommand : roundCommandChain) {
+                if (isFinish) {
+                    break;
+                }
+                roundCommand.execute(this);
+            }
+
+            new GameFinishCommand().execute(this);
+        } catch (InterruptedException e) {
+            isFinish = true;
+            log.error("game is shutdown. ", e);
+
+
         }
-
-        updateByBusiness();
-
     }
 
-    private void updateByBusiness() {
-
-    }
-
-    private void notifyGameStop() {
-
-    }
 
 }

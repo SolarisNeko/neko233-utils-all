@@ -1,4 +1,4 @@
-package com.neko233.game.common;
+package com.neko233.game.common.player;
 
 /**
  * @author SolarisNeko
@@ -8,6 +8,8 @@ public interface Player {
 
     Long userId();
 
+
+    String inputBody();
 
 
 
