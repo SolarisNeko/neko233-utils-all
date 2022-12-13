@@ -5,7 +5,7 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-utils-all</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
     <packaging>pom</packaging>
     <modules>
         <module>neko233-action-chain</module>
