@@ -9,8 +9,4 @@ public interface Player {
     Long userId();
 
 
-    String inputBody();
-
-
-
 }

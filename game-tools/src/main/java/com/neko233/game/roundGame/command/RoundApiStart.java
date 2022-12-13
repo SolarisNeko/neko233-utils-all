@@ -8,7 +8,7 @@ import com.neko233.game.roundGame.RoundGameContext;
  * @author SolarisNeko
  * Date on 2022-12-12
  */
-public class RoundPostStopCommand implements RoundCommand {
+public class RoundApiStart implements RoundApi {
 
     @Override
     public void execute(RoundGameContext context) {

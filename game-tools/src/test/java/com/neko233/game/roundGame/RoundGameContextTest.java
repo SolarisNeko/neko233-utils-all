@@ -3,6 +3,8 @@ package com.neko233.game.roundGame;
 import com.alibaba.fastjson2.JSON;
 import com.neko233.game.common.player.Player;
 import com.neko233.game.common.player.SimplePlayer;
+import com.neko233.game.roundGame.order.PlayerOrderDone;
+import com.neko233.game.roundGame.order.PlayerOrderPing;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -33,20 +35,34 @@ public class RoundGameContextTest {
             add(build2);
         }};
 
-        RoundGameContext roundGameContext = new RoundGameContext(players, list);
-        System.out.println(JSON.toJSONString(roundGameContext));
+        RoundGameContext context = new RoundGameContext(players, list);
+        System.out.println(JSON.toJSONString(context));
 
 
         new Thread(() -> {
-            roundGameContext.scheduleGame();
+            context.scheduleGame();
         }).start();
 
         TimeUnit.SECONDS.sleep(1);
 
-        build1.setInputBody("hello, " + build1.userId());
-        build2.setInputBody("hello, " + build2.userId());
+        // player 1
+        context.addOrder(PlayerOrderPing.builder()
+                .player(build1)
+                .build());
+        context.addOrder(PlayerOrderDone.builder()
+                .player(build1)
+                .build());
 
-        TimeUnit.SECONDS.sleep(10);
+        // player 2
+        context.addOrder(PlayerOrderPing.builder()
+                .player(build2)
+                .build());
+        context.addOrder(PlayerOrderDone.builder()
+                .player(build2)
+                .build());
+
+
+        TimeUnit.SECONDS.sleep(15);
     }
 
 }

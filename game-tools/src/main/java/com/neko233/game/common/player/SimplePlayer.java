@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 public class SimplePlayer implements Player {
 
     private Long userId;
-    private String inputBody;
 
 
     @Override
@@ -24,10 +23,4 @@ public class SimplePlayer implements Player {
         return userId;
     }
 
-    @Override
-    public String inputBody() {
-        String bodyClone = inputBody;
-        this.inputBody = null;
-        return bodyClone;
-    }
 }
