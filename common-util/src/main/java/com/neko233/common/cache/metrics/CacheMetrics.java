@@ -1,7 +1,7 @@
 package com.neko233.common.cache.metrics;
 
 /**
- * @author LuoHaoJun on 2022-12-14
+ * @author SolarisNeko on 2022-12-14
  **/
 public interface CacheMetrics {
 

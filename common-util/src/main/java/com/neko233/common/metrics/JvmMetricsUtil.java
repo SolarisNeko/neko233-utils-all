@@ -5,7 +5,7 @@ import java.lang.management.ManagementFactory;
 import java.util.List;
 
 /**
- * @author LuoHaoJun on 2022-12-14
+ * @author SolarisNeko on 2022-12-14
  **/
 public class JvmMetricsUtil {
 

@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 /**
- * @author LuoHaoJun on 2022-12-14
+ * @author SolarisNeko on 2022-12-14
  **/
 public abstract class AbstractCache<K, V> implements Cache<K, V>, CacheMetrics {
 

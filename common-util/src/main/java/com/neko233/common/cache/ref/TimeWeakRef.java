@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import java.lang.ref.WeakReference;
 
 /**
- * @author LuoHaoJun on 2022-12-12
+ * @author SolarisNeko on 2022-12-12
  **/
 public class TimeWeakRef<V> extends WeakReference<V> {
 
