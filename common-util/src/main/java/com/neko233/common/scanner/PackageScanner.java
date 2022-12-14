@@ -1,4 +1,4 @@
-package com.neko233.scanner;
+package com.neko233.common.scanner;
 
 import java.io.File;
 import java.net.URL;
