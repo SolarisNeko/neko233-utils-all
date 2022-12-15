@@ -15,14 +15,14 @@ public class MapSearchUtil {
     }
 
     /**
-     * DFS
+     * DFS 2D 地图
      *
      * @param target  目标起点
      * @param map     地图 : 是否可走
      * @param markMap 地图标记 : 是否已经走过
      * @param out     输出的 list, 请务必清空. Java 弊端
      */
-    public static void dfs(Map2DKey target, Map<Map2DKey, Boolean> map, Map<Map2DKey, Boolean> markMap, List<Map2DKey> out) {
+    public static void dfs2D(Map2DKey target, Map<Map2DKey, Boolean> map, Map<Map2DKey, Boolean> markMap, List<Map2DKey> out) {
         if (out == null) {
             return;
         }
@@ -55,25 +55,27 @@ public class MapSearchUtil {
         out.add(target);
 
         for (Map2DKey newGrid : toTravelList) {
-            dfs(newGrid, map, markMap, out);
+            dfs2D(newGrid, map, markMap, out);
         }
     }
 
 
     /**
-     * @param target
-     * @param map
-     * @param markMap
-     * @param bfsQueue
-     * @param out
+     * BFS 2D 地图
+     *
+     * @param target   目标点
+     * @param map2D    2D 地图
+     * @param markMap  标记地图哪些已经走过, can null
+     * @param bfsQueue 队列, can null
+     * @param out      输出的结果
      */
-    public static void bfs(Map2DKey target, Map<Map2DKey, Boolean> map, Map<Map2DKey, Boolean> markMap, Queue<Map2DKey> bfsQueue, List<Map2DKey> out) {
+    public static void bfs2D(Map2DKey target, Map<Map2DKey, Boolean> map2D, Map<Map2DKey, Boolean> markMap, Queue<Map2DKey> bfsQueue, List<Map2DKey> out) {
         // init
         if (markMap == null) {
             markMap = new HashMap<>();
         }
         if (bfsQueue == null) {
-            bfsQueue = new PriorityQueue<>(map.size());
+            bfsQueue = new PriorityQueue<>(map2D.size());
         }
         if (target == null && bfsQueue.size() == 0) {
             return;
@@ -88,7 +90,7 @@ public class MapSearchUtil {
         if (isComeHere(markMap, target)) {
             return;
         }
-        if (isCanGo(map, target)) {
+        if (isCanGo(map2D, target)) {
             return;
         }
 
@@ -109,7 +111,7 @@ public class MapSearchUtil {
                 continue;
             }
             // 是否可以走
-            if (isCanGo(map, newGrid)) {
+            if (isCanGo(map2D, newGrid)) {
                 continue;
             }
             bfsQueue.add(newGrid);
@@ -118,7 +120,7 @@ public class MapSearchUtil {
 
         int snapshotSize = bfsQueue.size();
         for (int i = 0; i < snapshotSize; i++) {
-            bfs(null, map, markMap, bfsQueue, out);
+            bfs2D(null, map2D, markMap, bfsQueue, out);
         }
 
     }

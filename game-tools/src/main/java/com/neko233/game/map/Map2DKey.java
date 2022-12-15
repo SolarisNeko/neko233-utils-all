@@ -78,7 +78,7 @@ public class Map2DKey {
                 .build();
     }
 
-    public static Map<Map2DKey, Boolean> from2dGraphWithBoolean(int mapId, int[][] graph) {
+    public static Map<Map2DKey, Boolean> from2dGraphWithBoolean(int mapId, Integer[][] graph) {
         Map<Map2DKey, Boolean> map = new HashMap<>();
         for (int y = 0; y < graph.length; ++y) {
             for (int x = 0; x < graph[y].length; x++) {
