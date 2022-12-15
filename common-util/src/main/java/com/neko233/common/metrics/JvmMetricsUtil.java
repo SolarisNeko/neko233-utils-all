@@ -16,14 +16,23 @@ public class JvmMetricsUtil {
         return Runtime.getRuntime().totalMemory();
     }
 
+    /**
+     * @return 最大大小
+     */
     public static long getHeapMaxSizeByte() {
         return Runtime.getRuntime().maxMemory();
     }
 
+    /**
+     * @return 空闲大小
+     */
     public static long getHeapFreeSizeByte() {
         return Runtime.getRuntime().freeMemory();
     }
 
+    /**
+     * @return GC 情况
+     */
     public static List<GarbageCollectorMXBean> getGcMxBeans() {
         return ManagementFactory.getGarbageCollectorMXBeans();
     }
