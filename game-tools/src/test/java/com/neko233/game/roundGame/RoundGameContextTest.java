@@ -5,7 +5,6 @@ import com.neko233.game.common.player.Player;
 import com.neko233.game.common.player.SimplePlayer;
 import com.neko233.game.roundGame.order.PlayerOrderDone;
 import com.neko233.game.roundGame.order.PlayerOrderPing;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class RoundGameContextTest {
 
-    @Test
+    /**
+     * 自测用
+     *
+     * @throws InterruptedException
+     */
     public void testActionChain() throws InterruptedException {
         ArrayList<RoundActor> list = new ArrayList<RoundActor>() {{
             add(RoundActor.builder().userId(1L).petId(1).speed(5L).build());
