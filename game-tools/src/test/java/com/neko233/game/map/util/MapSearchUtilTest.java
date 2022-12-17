@@ -1,7 +1,7 @@
 package com.neko233.game.map.util;
 
 import com.alibaba.fastjson2.JSON;
-import com.neko233.game.map.Map2DKey;
+import com.neko233.game.map.key.Map2DKey;
 import org.junit.Test;
 
 import java.util.ArrayList;

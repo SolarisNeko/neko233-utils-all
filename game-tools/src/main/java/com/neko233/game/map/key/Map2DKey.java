@@ -1,4 +1,4 @@
-package com.neko233.game.map;
+package com.neko233.game.map.key;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,16 +20,6 @@ public class Map2DKey {
     private int x;
     private int y;
 
-    public static void main(String[] args) {
-        List<Map2DKey> output = Map2DKey.generateXyAroundGridList(Map2DKey.builder()
-                .mapId(0)
-                .x(0)
-                .y(0)
-                .build()
-        );
-
-        System.out.println(output);
-    }
 
     /**
      * 生成：【上下左右】移动 1 个单位的 List

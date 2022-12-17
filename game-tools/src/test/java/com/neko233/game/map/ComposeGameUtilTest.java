@@ -1,6 +1,7 @@
 package com.neko233.game.map;
 
 import com.alibaba.fastjson2.JSON;
+import com.neko233.game.map.key.Map3DKey;
 import com.neko233.game.map.printer.Map3DPrinter;
 import com.neko233.game.map.util.ComposeGameUtil;
 import com.neko233.game.map.util.ScanGridResult;
@@ -19,17 +20,17 @@ public class ComposeGameUtilTest {
 
     @Test
     public void printMap3DTest() {
-        Map<Coordinate3d, Grid> mapConfig = new HashMap<>();
+        Map<Map3DKey, Grid> mapConfig = new HashMap<>();
         for (int generateX = 0; generateX < 3; generateX++) {
             for (int generateY = 0; generateY < 3; generateY++) {
-                mapConfig.put(Coordinate3d.from(generateX, generateY, 0),
+                mapConfig.put(Map3DKey.from(generateX, generateY, 0),
                         Grid.builder()
                                 .isOpen(true)
                                 .thingId(1)
                                 .build());
             }
         }
-        mapConfig.put(Coordinate3d.from(0, 0, 0), Grid.builder().thingId(999).build());
+        mapConfig.put(Map3DKey.from(0, 0, 0), Grid.builder().thingId(999).build());
         Map3D map3D = new Map3D(mapConfig);
 
         String s = Map3DPrinter.printMap2D(map3D);
@@ -56,13 +57,13 @@ public class ComposeGameUtilTest {
     public static void mapTest() {
 
         // init
-        Map<Coordinate3d, Grid> mapConfig = new HashMap<>();
+        Map<Map3DKey, Grid> mapConfig = new HashMap<>();
         for (int generateX = 0; generateX < 3; generateX++) {
             for (int generateY = 0; generateY < 3; generateY++) {
-                mapConfig.put(Coordinate3d.from(generateX, generateY, 0), Grid.builder().thingId(1).build());
+                mapConfig.put(Map3DKey.from(generateX, generateY, 0), Grid.builder().thingId(1).build());
             }
         }
-        mapConfig.put(Coordinate3d.from(0, 0, 0), Grid.builder().thingId(999).build());
+        mapConfig.put(Map3DKey.from(0, 0, 0), Grid.builder().thingId(999).build());
         Map3D map3D = new Map3D(mapConfig);
 
         System.out.println(JSON.toJSONString(map3D));
@@ -81,7 +82,7 @@ public class ComposeGameUtilTest {
 
         System.out.println("nine grid = \n" + JSON.toJSONString(aggGridMap));
 
-        List<Coordinate3d> canMergeList = ComposeGameUtil.findCanMergeList(aggGridMap);
+        List<Map3DKey> canMergeList = ComposeGameUtil.findCanMergeList(aggGridMap);
         System.out.println(JSON.toJSONString(canMergeList));
 
 

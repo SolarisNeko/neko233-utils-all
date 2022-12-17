@@ -1,6 +1,6 @@
 package com.neko233.game.map.util;
 
-import com.neko233.game.map.Coordinate3d;
+import com.neko233.game.map.key.Map3DKey;
 import com.neko233.game.map.Grid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +21,7 @@ import java.util.Map;
 public class ScanGridResult {
 
     private Grid centerGrid;
-    private Map<Grid, List<Coordinate3d>> aggByGridMap;
+    private Map<Grid, List<Map3DKey>> aggByGridMap;
 
 
 }

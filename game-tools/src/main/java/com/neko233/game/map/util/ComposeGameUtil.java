@@ -1,7 +1,7 @@
 package com.neko233.game.map.util;
 
 import com.google.common.collect.Lists;
-import com.neko233.game.map.Coordinate3d;
+import com.neko233.game.map.key.Map3DKey;
 import com.neko233.game.map.Grid;
 import com.neko233.game.map.Map3D;
 
@@ -29,13 +29,13 @@ public class ComposeGameUtil {
         }
 
 
-        List<Coordinate3d> needCheckCoordinateList = generateToCheckCoordinateList(targetX, targetY, null);
+        List<Map3DKey> needCheckCoordinateList = generateToCheckCoordinateList(targetX, targetY, null);
 
         // 物品, 序号集合
-        Map<Grid, List<Coordinate3d>> sameThingMap = new HashMap<>(9);
+        Map<Grid, List<Map3DKey>> sameThingMap = new HashMap<>(9);
 
         // 自动地图限制
-        for (Coordinate3d coordinate3D : needCheckCoordinateList) {
+        for (Map3DKey coordinate3D : needCheckCoordinateList) {
             Grid grid = map3D.getGrid(coordinate3D);
             if (grid == null) {
                 continue;
@@ -54,17 +54,17 @@ public class ComposeGameUtil {
 
     }
 
-    private static List<Coordinate3d> generateToCheckCoordinateList(Integer x, Integer y, Integer z) {
+    private static List<Map3DKey> generateToCheckCoordinateList(Integer x, Integer y, Integer z) {
         int[] range = new int[]{-1, 0, 1};
         int dimension3D = 3;
-        Set<Coordinate3d> coordinate3DSet = new HashSet<>();
+        Set<Map3DKey> coordinate3DSet = new HashSet<>();
 
         int tempX = Optional.ofNullable(x).orElse(0);
         int tempY = Optional.ofNullable(y).orElse(0);
         int tempZ = Optional.ofNullable(z).orElse(0);
         for (int idx : range) {
             if (x != null) {
-                coordinate3DSet.add(Coordinate3d.builder()
+                coordinate3DSet.add(Map3DKey.builder()
                         .x(tempX + idx)
                         .y(tempY)
                         .z(tempZ)
@@ -72,7 +72,7 @@ public class ComposeGameUtil {
                 );
             }
             if (y != null) {
-                coordinate3DSet.add(Coordinate3d.builder()
+                coordinate3DSet.add(Map3DKey.builder()
                         .x(tempX)
                         .y(tempY + idx)
                         .z(tempZ)
@@ -80,7 +80,7 @@ public class ComposeGameUtil {
                 );
             }
             if (z != null) {
-                coordinate3DSet.add(Coordinate3d.builder()
+                coordinate3DSet.add(Map3DKey.builder()
                         .x(tempX)
                         .y(tempY)
                         .z(tempZ + idx)
@@ -131,12 +131,12 @@ public class ComposeGameUtil {
     }
 
 
-    public static List<Coordinate3d> findCanMergeList(ScanGridResult scanGridResult) {
+    public static List<Map3DKey> findCanMergeList(ScanGridResult scanGridResult) {
         // default 3 compose
         return findCanMergeList(scanGridResult, 3);
     }
 
-    public static List<Coordinate3d> findCanMergeList(ScanGridResult scanGridResult, int limitSize) {
+    public static List<Map3DKey> findCanMergeList(ScanGridResult scanGridResult, int limitSize) {
         if (limitSize <= 0) {
             return new ArrayList<>();
         }
@@ -146,13 +146,13 @@ public class ComposeGameUtil {
         }
 
         // 检查九宫格, 是否满足3消条件
-        Map<Grid, List<Coordinate3d>> aggGridMap = Optional.ofNullable(scanGridResult.getAggByGridMap()).orElse(new HashMap<>());
+        Map<Grid, List<Map3DKey>> aggGridMap = Optional.ofNullable(scanGridResult.getAggByGridMap()).orElse(new HashMap<>());
 
         // 连成一片才能返回
-        List<Coordinate3d> chainGridList = new ArrayList<>();
-        for (Map.Entry<Grid, List<Coordinate3d>> gridListEntry : aggGridMap.entrySet()) {
+        List<Map3DKey> chainGridList = new ArrayList<>();
+        for (Map.Entry<Grid, List<Map3DKey>> gridListEntry : aggGridMap.entrySet()) {
             Grid scanGrid = gridListEntry.getKey();
-            List<Coordinate3d> sameGridCoordinate = gridListEntry.getValue();
+            List<Map3DKey> sameGridCoordinate = gridListEntry.getValue();
 
             if (!centerGrid.equals(scanGrid)) {
                 continue;

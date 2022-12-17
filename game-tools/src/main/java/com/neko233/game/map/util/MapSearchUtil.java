@@ -1,13 +1,13 @@
 package com.neko233.game.map.util;
 
-import com.neko233.game.map.Map2DKey;
+import com.neko233.game.map.key.Map2DKey;
 
 import java.util.*;
 
 /**
  * 图搜索工具
  *
- * @author SN on 2022-12-11
+ * @author SolarisNeko on 2022-12-11
  */
 public class MapSearchUtil {
 
