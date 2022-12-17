@@ -20,6 +20,7 @@ public class LogFormatUtilTest {
 
         Assert.assertEquals("INFO", formatMap.getOrDefault("level", ""));
         Assert.assertEquals("myLogger", formatMap.getOrDefault("logger", ""));
+        Assert.assertEquals("asdflkajsdflkjasdf", formatMap.getOrDefault("msg", ""));
     }
 
 }

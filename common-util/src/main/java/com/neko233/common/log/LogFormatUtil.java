@@ -156,11 +156,14 @@ public class LogFormatUtil {
     @NotNull
     private static Comparator<String> regexSorting() {
         return (o1, o2) -> {
-            if (" ".equals(o1)) {
-                return 1;
+            if (o1 == null | o2 == null) {
+                return 0;
             }
-            if (" ".equals(o2)) {
+            if (o1.length() > o2.length()) {
                 return -1;
+            }
+            if (o2.length() > o1.length()) {
+                return 1;
             }
             return 0;
         };
