@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * Date on 2022-12-17
  */
 @Slf4j
-public class LogFormatUtil {
+public class LogFormatSearchUtil {
 
     /**
      * 占位符格式. 格式 = ${英文+数字}
@@ -58,7 +58,7 @@ public class LogFormatUtil {
 
         List<String> lines = FileUtils.readLines(logFile, StandardCharsets.UTF_8);
         return lines.stream()
-                .map(line -> LogFormatUtil.lineFormatMapping(line, keywordTemplates, toSplitRegexExpression))
+                .map(line -> LogFormatSearchUtil.lineFormatMapping(line, keywordTemplates, toSplitRegexExpression))
                 .collect(Collectors.toList());
     }
 
@@ -84,7 +84,7 @@ public class LogFormatUtil {
         List<String> contentList = Arrays.asList(line.split(toSplitRegexExpression));
 
         List<String> keywordList = keywordTemplateList.stream()
-                .map(LogFormatUtil::getKeywordFromPlaceHolder)
+                .map(LogFormatSearchUtil::getKeywordFromPlaceHolder)
                 .collect(Collectors.toList());
 
         // 生成映射结果
