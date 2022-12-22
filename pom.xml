@@ -5,15 +5,8 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-utils-all</artifactId>
-    <version>0.0.14</version>
-    <packaging>pom</packaging>
+    <version>0.1.1</version>
 
-    <modules>
-        <module>common-util</module>
-        <module>game-tools</module>
-        <module>neko233-action-chain</module>
-        <module>neko233-dispatcher-with-delegate</module>
-    </modules>
 
     <name>neko233-utils-all</name>
     <url>https://github.com/SolarisNeko/neko233-utils-all/tree/main</url>
@@ -46,7 +39,7 @@
 
     <properties>
         <java.version>8</java.version>
-<!--        <java.version>8</java.version>-->
+        <!--        <java.version>8</java.version>-->
         <github.global.server>github</github.global.server>
         <maven.compiler.source>1.8</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -168,16 +161,16 @@
         </dependency>
 
         <!-- protobuf -->
-<!--        <dependency>-->
-<!--            <groupId>com.google.protobuf</groupId>-->
-<!--            <artifactId>protobuf-java</artifactId>-->
-<!--            <version>3.21.7</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.google.protobuf</groupId>-->
-<!--            <artifactId>protobuf-java-util</artifactId>-->
-<!--            <version>3.21.7</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.google.protobuf</groupId>-->
+        <!--            <artifactId>protobuf-java</artifactId>-->
+        <!--            <version>3.21.7</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.google.protobuf</groupId>-->
+        <!--            <artifactId>protobuf-java-util</artifactId>-->
+        <!--            <version>3.21.7</version>-->
+        <!--        </dependency>-->
 
         <!-- Post Processor -->
         <dependency>
