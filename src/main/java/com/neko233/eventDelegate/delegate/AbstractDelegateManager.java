@@ -8,7 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * 实现 Delegate
+ * 抽象 delegate 管理器. T =
  *
  * @author SolarisNeko
  * Date on 2022-10-30

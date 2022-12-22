@@ -2,7 +2,7 @@ package com.neko233.delegate;
 
 import com.neko233.delegate.mock.TestDelegateManager;
 import com.neko233.delegate.mock.MockDataDto;
-import com.neko233.eventDelegate.dispatcher.DispatcherCenter;
+import com.neko233.eventDelegate.delegate.DispatcherCenter;
 import com.neko233.eventDelegate.exception.RegisterDuplicateException;
 import org.junit.Test;
 

@@ -1,8 +1,6 @@
-package com.neko233.eventDelegate.dispatcher;
+package com.neko233.eventDelegate.delegate;
 
 import com.neko233.eventDelegate.exception.RegisterDuplicateException;
-import com.neko233.eventDelegate.delegate.AbstractDelegateManager;
-import com.neko233.eventDelegate.delegate.EventObserver;
 import com.neko233.eventDelegate.pool.MyThreadPoolFactory;
 import org.apache.commons.lang3.StringUtils;
 
@@ -49,12 +47,12 @@ public class DispatcherCenter {
      * @param data 数据
      */
     public void delegateHandleInSync(String key, Object data) {
-        AbstractDelegateManager<?> manager = checkObserverIsBlank(key);
-        if (manager == null) {
+        AbstractDelegateManager<?> delegate = getDelegateManager(key);
+        if (delegate == null) {
             return;
         }
 
-        manager.notifyAllObserver(data);
+        delegate.notifyAllObserver(data);
     }
 
 
@@ -110,7 +108,7 @@ public class DispatcherCenter {
      * @return isOk?
      */
     public boolean addObserverByKey(String key, EventObserver<?> eventObserver) {
-        AbstractDelegateManager<?> manager = checkObserverIsBlank(key);
+        AbstractDelegateManager<?> manager = getDelegateManager(key);
         if (manager == null) {
             return false;
         }
@@ -124,7 +122,7 @@ public class DispatcherCenter {
      * @return isOk?
      */
     public boolean removeObserverByKey(String key, EventObserver<?> eventObserver) {
-        AbstractDelegateManager<?> manager = checkObserverIsBlank(key);
+        AbstractDelegateManager<?> manager = getDelegateManager(key);
         if (manager == null) {
             return false;
         }
@@ -138,7 +136,7 @@ public class DispatcherCenter {
      * @param key 唯一标识
      * @return 管理器
      */
-    private AbstractDelegateManager<?> checkObserverIsBlank(String key) {
+    private AbstractDelegateManager<?> getDelegateManager(String key) {
         if (StringUtils.isBlank(key)) {
             return null;
         }
