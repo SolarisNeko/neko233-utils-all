@@ -5,13 +5,14 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-utils-all</artifactId>
-    <version>0.0.13</version>
+    <version>0.0.14</version>
     <packaging>pom</packaging>
 
     <modules>
+        <module>common-util</module>
+        <module>game-tools</module>
         <module>neko233-action-chain</module>
         <module>neko233-dispatcher-with-delegate</module>
-        <module>game-tools</module>
     </modules>
 
     <name>neko233-utils-all</name>
@@ -58,7 +59,6 @@
     </properties>
 
     <dependencies>
-
 
         <!-- HTTP -->
         <dependency>
@@ -168,16 +168,16 @@
         </dependency>
 
         <!-- protobuf -->
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>3.21.7</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java-util</artifactId>
-            <version>3.21.7</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.google.protobuf</groupId>-->
+<!--            <artifactId>protobuf-java</artifactId>-->
+<!--            <version>3.21.7</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.protobuf</groupId>-->
+<!--            <artifactId>protobuf-java-util</artifactId>-->
+<!--            <version>3.21.7</version>-->
+<!--        </dependency>-->
 
         <!-- Post Processor -->
         <dependency>

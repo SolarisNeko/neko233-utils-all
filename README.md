@@ -6,13 +6,13 @@
 <dependency>
    <groupId>com.neko233</groupId>
    <artifactId>neko233-utils-all</artifactId>
-   <version>0.0.5</version>
+   <version>0.0.14</version>
 </dependency>
 ```
 
 ## Gradle
 ```kotlin
-implementation 'com.neko233:neko233-utils-all:0.0.5'
+implementation 'com.neko233:neko233-utils-all:0.0.14'
 ```
 
 

@@ -1,8 +1,8 @@
 package com.neko233.common.log;
 
+import com.neko233.common.file.FileUtils233;
 import com.neko233.common.regex.RegexUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,7 +56,7 @@ public class LogFormatSearchUtil {
         final List<String> keywordTemplates = getKeywordTemplates(logFormat);
         final String toSplitRegexExpression = generateRegexSplitExpression(logFormat, keywordTemplates);
 
-        List<String> lines = FileUtils.readLines(logFile, StandardCharsets.UTF_8);
+        List<String> lines = FileUtils233.readLines(logFile, StandardCharsets.UTF_8);
         return lines.stream()
                 .map(line -> LogFormatSearchUtil.lineFormatMapping(line, keywordTemplates, toSplitRegexExpression))
                 .collect(Collectors.toList());
