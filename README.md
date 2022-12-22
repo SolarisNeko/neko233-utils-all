@@ -12,9 +12,8 @@
 
 ## Gradle
 ```kotlin
-implementation 'com.neko233:neko233-utils-all:0.1.2'
+implementation("com.neko233:neko233-utils-all:0.1.2")
 ```
-
 
 定位: 开箱即用的常用包依赖.
 业界常用:
