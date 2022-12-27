@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * Date on 2022-12-17
  */
 @Slf4j
-public class LogFormatSearchUtil {
+public class LogFormatUtil {
 
     /**
      * 占位符格式. 格式 = ${英文+数字}
@@ -49,6 +49,10 @@ public class LogFormatSearchUtil {
 
 
     public static List<Map<String, String>> formatLogFile(File logFile, String logFormat) throws IOException {
+        return formatLogFile(logFile, logFormat, true);
+    }
+
+    public static List<Map<String, String>> formatLogFile(File logFile, String logFormat, boolean isNeedTranslate) throws IOException {
         if (!logFile.exists()) {
             return new ArrayList<>();
         }
@@ -58,16 +62,20 @@ public class LogFormatSearchUtil {
 
         List<String> lines = FileUtils233.readLines(logFile, StandardCharsets.UTF_8);
         return lines.stream()
-                .map(line -> LogFormatSearchUtil.lineFormatMapping(line, keywordTemplates, toSplitRegexExpression))
+                .map(line -> LogFormatUtil.lineFormatMapping(line, keywordTemplates, toSplitRegexExpression, isNeedTranslate))
                 .collect(Collectors.toList());
     }
 
 
-    private static Map<String, String> lineFormatMapping(String line, String logFormat) {
+    public static Map<String, String> lineFormatMapping(String line, String logFormat) {
+        return lineFormatMapping(line, logFormat, true);
+    }
+
+    public static Map<String, String> lineFormatMapping(String line, String logFormat, boolean isNeedTranslate) {
         final List<String> keywordTemplates = getKeywordTemplates(logFormat);
         final String toSplitRegexExpression = generateRegexSplitExpression(logFormat, keywordTemplates);
 
-        return lineFormatMapping(line, keywordTemplates, toSplitRegexExpression);
+        return lineFormatMapping(line, keywordTemplates, toSplitRegexExpression, isNeedTranslate);
     }
 
     /**
@@ -76,15 +84,18 @@ public class LogFormatSearchUtil {
      * @param toSplitRegexExpression 切割每一行的正则表达式.
      * @return 根据 logFormat, 自动解析 line, 返回映射结果 Map
      */
-    public static Map<String, String> lineFormatMapping(String line, List<String> keywordTemplateList, String toSplitRegexExpression) {
+    public static Map<String, String> lineFormatMapping(String line, List<String> keywordTemplateList, String toSplitRegexExpression, boolean isNeedTranslate) {
         if (StringUtils.isBlank(line)) {
             return new HashMap<>(0);
         }
 
-        List<String> contentList = Arrays.asList(line.split(toSplitRegexExpression));
+        // | is special
+        String toSplitTranslateExpression = isNeedTranslate(toSplitRegexExpression, isNeedTranslate);
+
+        List<String> contentList = Arrays.asList(line.split(toSplitTranslateExpression));
 
         List<String> keywordList = keywordTemplateList.stream()
-                .map(LogFormatSearchUtil::getKeywordFromPlaceHolder)
+                .map(LogFormatUtil::getKeywordFromPlaceHolder)
                 .collect(Collectors.toList());
 
         // 生成映射结果
@@ -108,6 +119,26 @@ public class LogFormatSearchUtil {
             resultMap.put(keywordList.get(start), content);
         }
         return resultMap;
+    }
+
+    private static String isNeedTranslate(String toSplitRegexExpression, boolean isNeedTranslate) {
+        String toSplitTranslateExpression = isNeedTranslate ?
+                toSplitRegexExpression
+                        .replace("(", "\\(")
+                        .replace(")", "\\)")
+                        .replace(".", "\\.")
+                        .replace("*", "\\*")
+                        .replace("$", "\\$")
+                        .replace("+", "\\+")
+                        .replace("[", "\\[")
+                        .replace("]", "\\]")
+                        .replace("?", "\\?")
+                        .replace("^", "\\^")
+                        .replace("{", "\\{")
+                        .replace("}", "\\}")
+//                        .replace("|", "\\|")
+                : toSplitRegexExpression;
+        return toSplitTranslateExpression;
     }
 
     private static String getKeywordFromPlaceHolder(String placeholder) {

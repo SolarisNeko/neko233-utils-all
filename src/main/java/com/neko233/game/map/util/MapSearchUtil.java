@@ -3,6 +3,7 @@ package com.neko233.game.map.util;
 import com.neko233.game.map.key.Map2DKey;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * 图搜索工具
@@ -75,7 +76,7 @@ public class MapSearchUtil {
             markMap = new HashMap<>();
         }
         if (bfsQueue == null) {
-            bfsQueue = new PriorityQueue<>(map2D.size());
+            bfsQueue = new ConcurrentLinkedDeque<>();
         }
         if (target == null && bfsQueue.size() == 0) {
             return;
