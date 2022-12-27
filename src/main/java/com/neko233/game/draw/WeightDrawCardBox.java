@@ -6,6 +6,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * 权重抽卡盒子
+ *
+ * @param <CARD> 抽取的卡
+ */
 public class WeightDrawCardBox<CARD> implements Serializable, Cloneable {
 
     private final Map<CARD, Integer> weightCardMap;
