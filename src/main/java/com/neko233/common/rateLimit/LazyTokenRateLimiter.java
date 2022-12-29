@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author LuoHaoJun on 2022-12-26
+ * @author SolarisNeko on 2022-12-26
  **/
 @Slf4j
 public class LazyTokenRateLimiter {
@@ -13,11 +13,17 @@ public class LazyTokenRateLimiter {
     private final Object mutex = new Object();
     // state
     private final int reqPerSecond;
+    private final int maxReqPerSecond;
     private long previousUpdateMs = System.currentTimeMillis();
     private int counter = 0;
 
     public LazyTokenRateLimiter(int reqPerSecond) {
+        this(reqPerSecond, reqPerSecond);
+    }
+
+    public LazyTokenRateLimiter(int reqPerSecond, int maxReqPerSecond) {
         this.reqPerSecond = reqPerSecond;
+        this.maxReqPerSecond = maxReqPerSecond;
     }
 
     public boolean tryAcquire() {
@@ -33,6 +39,11 @@ public class LazyTokenRateLimiter {
         boolean isSuccess = acquireWithRefresh(permit);
 
         // 没有成功, 则重试
+        isSuccess = retryIfFailure(permit, timeout, unit, currentMs, isSuccess);
+        return isSuccess;
+    }
+
+    private boolean retryIfFailure(int permit, int timeout, TimeUnit unit, long currentMs, boolean isSuccess) {
         long tempMs;
         if (!isSuccess && timeout > 0) {
             tempMs = System.currentTimeMillis();
@@ -50,7 +61,6 @@ public class LazyTokenRateLimiter {
                 }
             }
         }
-
         return isSuccess;
     }
 
@@ -60,7 +70,7 @@ public class LazyTokenRateLimiter {
         boolean isSuccess = false;
         synchronized (mutex) {
             int result = counter + permit;
-            if (result <= reqPerSecond) {
+            if (result <= maxReqPerSecond) {
                 counter = result;
                 isSuccess = true;
             }
@@ -70,9 +80,10 @@ public class LazyTokenRateLimiter {
 
     private void checkUpdate() {
         long currentMs = System.currentTimeMillis();
-        if (currentMs - previousUpdateMs > TimeUnit.SECONDS.toMillis(1)) {
+        long minusSecond = currentMs - previousUpdateMs;
+        if (minusSecond > TimeUnit.SECONDS.toMillis(1)) {
             synchronized (mutex) {
-                counter = Math.max(0, counter - reqPerSecond);
+                counter = Math.max(0, counter - reqPerSecond * (int) minusSecond);
             }
             previousUpdateMs = currentMs;
         }

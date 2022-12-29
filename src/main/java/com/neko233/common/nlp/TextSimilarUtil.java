@@ -3,7 +3,7 @@ package com.neko233.common.nlp;
 /**
  * 相似度匹配工具
  *
- * @author LuoHaoJun
+ * @author SolarisNeko
  * @date 2022-01-24
  **/
 public class TextSimilarUtil {

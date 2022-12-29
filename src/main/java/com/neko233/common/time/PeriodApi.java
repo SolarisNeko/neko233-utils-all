@@ -1,7 +1,7 @@
 package com.neko233.common.time;
 
 /**
- * @author LuoHaoJun on 2022-12-15
+ * @author SolarisNeko on 2022-12-15
  **/
 public interface PeriodApi {
 
