@@ -5,7 +5,7 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-utils-all</artifactId>
-    <version>0.1.4</version>
+    <version>0.1.5</version>
 
 
     <name>neko233-utils-all</name>
@@ -177,6 +177,11 @@
             <groupId>org.realityforge.org.jetbrains.annotations</groupId>
             <artifactId>org.jetbrains.annotations</artifactId>
             <version>1.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
         </dependency>
 
     </dependencies>

@@ -1,10 +1,8 @@
-package com.neko233.idGenerator.snowflake;
+package com.neko233.idGenerator.rds;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.neko233.db.DataSourceMock;
 import com.neko233.idGenerator.IdGenerator;
-import com.neko233.idGenerator.rds.IdGeneratorByRds;
-import com.neko233.idGenerator.rds.IdGeneratorEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Test;

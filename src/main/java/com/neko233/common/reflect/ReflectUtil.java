@@ -1,5 +1,8 @@
 package com.neko233.common.reflect;
 
+import com.google.common.collect.Lists;
+import kotlin.collections.EmptyList;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,11 +66,19 @@ public class ReflectUtil {
         return null;
     }
 
+
+    public static List<Field> getAllFieldsRecursive(Object obj) {
+        if (obj == null) {
+            return new ArrayList<>();
+        }
+        return getAllFieldsRecursive(obj.getClass());
+    }
+
     /**
      * 递归获取所有 field
      *
-     * @param schema
-     * @return
+     * @param schema clazz
+     * @return 所有字段
      */
     public static List<Field> getAllFieldsRecursive(Class<?> schema) {
         List<Field> fields = new ArrayList<>();

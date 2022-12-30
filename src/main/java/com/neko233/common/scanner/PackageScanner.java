@@ -43,7 +43,11 @@ public final class PackageScanner {
      * @param filter      过滤器
      * @return 符合条件的类集合
      */
-    static public Set<Class<?>> listClazz(String packageName, boolean recursive, IClazzFilter filter) {
+    static public Set<Class<?>> listClazz(String packageName, boolean recursive) {
+        return listClazz(packageName, recursive, (clazz -> true));
+    }
+    
+    static public Set<Class<?>> listClazz(String packageName, boolean recursive, ClassFilter filter) {
 
         if (packageName == null ||
                 packageName.isEmpty()) {
@@ -121,7 +125,7 @@ public final class PackageScanner {
      * @return 符合条件的类集合
      */
     static private Set<Class<?>> listClazzFromDir(
-            final File dirFile, final String packageName, final boolean recursive, IClazzFilter filter) {
+            final File dirFile, final String packageName, final boolean recursive, ClassFilter filter) {
 
         if (!dirFile.exists() ||
                 !dirFile.isDirectory()) {
@@ -219,7 +223,7 @@ public final class PackageScanner {
      * @return 符合条件的类集合
      */
     static private Set<Class<?>> listClazzFromJar(
-            final File jarFilePath, final String packageName, final boolean recursive, IClazzFilter filter) {
+            final File jarFilePath, final String packageName, final boolean recursive, ClassFilter filter) {
 
         if (jarFilePath == null ||
                 jarFilePath.isDirectory()) {
@@ -363,7 +367,7 @@ public final class PackageScanner {
      * @author hjj2019
      */
     @FunctionalInterface
-    static public interface IClazzFilter {
+    static public interface ClassFilter {
         /**
          * 是否接受当前类?
          *
