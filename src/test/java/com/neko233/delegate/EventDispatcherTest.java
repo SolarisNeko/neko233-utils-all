@@ -1,12 +1,15 @@
 package com.neko233.delegate;
 
-import com.neko233.mockData.MockDataDto;
 import com.neko233.event.delegate.EventDispatcher;
+import com.neko233.event.delegate.EventListener;
 import com.neko233.event.exception.RegisterDuplicateException;
+import com.neko233.mockData.MockDataDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -19,6 +22,7 @@ public class EventDispatcherTest {
     private final EventDispatcher eventDispatcher = new EventDispatcher();
 
     MockDataDto data = MockDataDto.builder().name("neko233").build();
+
 
     @Test
     public void test_register() throws RegisterDuplicateException {

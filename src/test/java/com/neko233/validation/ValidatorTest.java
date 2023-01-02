@@ -1,6 +1,6 @@
 package com.neko233.validation;
 
-import com.neko233.validation.impl.JakartaEmailValidator;
+import com.neko233.validation.impl.jakarta.JakartaEmailValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Assert;

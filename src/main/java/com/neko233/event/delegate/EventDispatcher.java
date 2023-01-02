@@ -31,6 +31,10 @@ public class EventDispatcher implements DispatcherApi {
 
     private ThreadPoolExecutor threadPool;
     private ThrowableHandler throwableHandler;
+    /**
+     * k-v for dispatcher choose delegate chain .
+     */
+    private final Map<String, Set<EventListener>> dispatcherMap = new ConcurrentHashMap<>();
 
 
     public EventDispatcher() {
@@ -44,12 +48,6 @@ public class EventDispatcher implements DispatcherApi {
                 .throwableHandler((t -> log.error("[{}] happen error. ", EventDispatcher.class.getSimpleName(), t)))
                 .build();
     }
-
-
-    /**
-     * k-v for dispatcher choose delegate chain .
-     */
-    private final Map<String, Set<EventListener>> dispatcherMap = new ConcurrentHashMap<>();
 
 
     /**
@@ -69,15 +67,16 @@ public class EventDispatcher implements DispatcherApi {
             return;
         }
 
-        try {
-            for (EventListener eventListener : eventListeners) {
+        for (EventListener eventListener : eventListeners) {
+            // independent listener
+            try {
                 eventListener.handle(data);
+            } catch (Throwable t) {
+                if (throwableHandler == null) {
+                    return;
+                }
+                throwableHandler.handle(t);
             }
-        } catch (Throwable t) {
-            if (throwableHandler == null) {
-                return;
-            }
-            throwableHandler.handle(t);
         }
     }
 

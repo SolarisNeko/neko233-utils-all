@@ -1,7 +1,8 @@
-package com.neko233.validation.impl;
+package com.neko233.validation.impl.jakarta;
 
 import com.neko233.validation.ValidateApi;
 import jakarta.validation.constraints.Email;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +27,9 @@ public class JakartaEmailValidator implements ValidateApi<Email, String> {
 
     @Override
     public String getReason(Email email, String fieldValue) {
+        if (StringUtils.isNotBlank(email.message())) {
+            return email.message();
+        }
         return String.format("%s is not target email format. your email format = %s", fieldValue, email.regexp());
     }
 

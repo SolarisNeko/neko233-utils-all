@@ -2,6 +2,7 @@ package com.neko233.idGenerator.rds;
 
 import com.neko233.common.close.CloseableHelper;
 import com.neko233.idGenerator.IdGenerator;
+import com.neko233.idGenerator.IdGeneratorException;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
@@ -89,9 +90,9 @@ public class IdGeneratorByRds implements IdGenerator {
         return true;
     }
 
-    public long getCurrentId() {
+    public long getCurrentId() throws IdGeneratorException {
         if (cacheState == null) {
-            tryUpdate(1);
+            cacheId(0);
         }
         return cacheState.getCurrentId();
     }
@@ -102,11 +103,11 @@ public class IdGeneratorByRds implements IdGenerator {
     }
 
     @Override
-    public Long nextId() {
+    public Long nextId() throws IdGeneratorException {
         Long id = idQueue.poll();
         // lazy
         if (id == null) {
-            boolean isSuccess = tryUpdate(generateBatchSize);
+            boolean isSuccess = cacheId(generateBatchSize);
             if (isSuccess) {
                 id = idQueue.poll();
             }
@@ -114,7 +115,8 @@ public class IdGeneratorByRds implements IdGenerator {
         return id;
     }
 
-    private boolean tryUpdate(int count) {
+    @Override
+    public boolean cacheId(int count) throws IdGeneratorException {
         if (count < 0) {
             return false;
         }
@@ -128,6 +130,8 @@ public class IdGeneratorByRds implements IdGenerator {
             }
             return true;
         }
+
+        // update
         Connection connection = null;
         PreparedStatement ps = null;
         try {
@@ -155,7 +159,7 @@ public class IdGeneratorByRds implements IdGenerator {
                 }
                 cacheState.setCurrentId(currentId + cacheState.getStep());
             } else {
-
+                throw new IdGeneratorException(String.format("[id-generator-by-rds] can not get more id! you request id number = %s, schema = %s", count, connection.getSchema()));
             }
             connection.commit();
         } catch (SQLException e) {
@@ -231,11 +235,11 @@ public class IdGeneratorByRds implements IdGenerator {
     }
 
     @Override
-    public List<Long> nextIds(int count) {
+    public List<Long> nextIds(int count) throws IdGeneratorException {
         List<Long> list = new ArrayList<>();
 
         int batchCount = Math.abs(Math.min(idQueue.size() - count, count));
-        tryUpdate(batchCount);
+        cacheId(batchCount);
 
         for (int i = 0; i < count; i++) {
             Long e = nextId();

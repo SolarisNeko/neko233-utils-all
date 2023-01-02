@@ -1,6 +1,7 @@
 package com.neko233.idGenerator.snowflake;
 
 import com.neko233.idGenerator.IdGenerator;
+import com.neko233.idGenerator.IdGeneratorException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -77,7 +78,7 @@ public class IdGeneratorBySnowflake implements IdGenerator {
 
     // 下一个ID生成算法
     @Override
-    public synchronized Long nextId() {
+    public synchronized Long nextId() throws IdGeneratorException {
         long currentMs = getCurrentMs();
 
         // 获取当前时间戳如果小于上次时间戳，则表示时间戳获取出现异常
@@ -110,7 +111,7 @@ public class IdGeneratorBySnowflake implements IdGenerator {
     }
 
     @Override
-    public List<Long> nextIds(int count) {
+    public List<Long> nextIds(int count) throws IdGeneratorException {
         List<Long> idList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             Long e = nextId();
@@ -122,8 +123,13 @@ public class IdGeneratorBySnowflake implements IdGenerator {
         return idList;
     }
 
+    @Override
+    public boolean cacheId(int count) throws IdGeneratorException {
+        return false;
+    }
+
     // 获取时间戳，并与上次时间戳比较
-    private long untilNextMillis(long lastTimestamp) {
+    private long untilNextMillis(long lastTimestamp) throws IdGeneratorException {
         long timestamp = getCurrentMs();
         int count = 0;
         while (timestamp <= lastTimestamp && count < RETRY_MAX_COUNT_IN_SAME_MS) {
@@ -131,7 +137,7 @@ public class IdGeneratorBySnowflake implements IdGenerator {
             count++;
         }
         if (count >= RETRY_MAX_COUNT_IN_SAME_MS) {
-            throw new RuntimeException("你的本地时钟一直回滚. your local clock is crazy because it still back to previous timestamp");
+            throw new IdGeneratorException("你的本地时钟一直回滚. your local clock is crazy because it still back to previous timestamp");
         }
         return timestamp;
     }
