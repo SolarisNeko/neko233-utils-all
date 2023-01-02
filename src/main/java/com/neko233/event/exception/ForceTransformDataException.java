@@ -1,4 +1,4 @@
-package com.neko233.eventDelegate.exception;
+package com.neko233.event.exception;
 
 /**
  * @author SolarisNeko

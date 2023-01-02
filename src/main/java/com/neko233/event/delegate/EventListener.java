@@ -1,4 +1,4 @@
-package com.neko233.eventDelegate.delegate;
+package com.neko233.event.delegate;
 
 /**
  * Delegate 委托模式 = 我提供 data -> EventObserverManager -> 遍历 Observer 进行链式调用
@@ -7,11 +7,11 @@ package com.neko233.eventDelegate.delegate;
  * @author SolarisNeko
  * Date on 2022-10-30
  */
-public interface EventObserver<T> {
+public interface EventListener<T> {
 
     /**
-     * @param anyData 任意数据
+     * @param event 任意数据
      */
-    void listen(T anyData);
+    void handle(T event);
 
 }

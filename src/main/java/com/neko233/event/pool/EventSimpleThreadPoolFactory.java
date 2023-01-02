@@ -1,4 +1,4 @@
-package com.neko233.eventDelegate.pool;
+package com.neko233.event.pool;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -10,15 +10,15 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author SolarisNeko
  * Date on 2022-10-30
  */
-public class MyThreadPoolFactory {
+public class EventSimpleThreadPoolFactory {
 
 
-    public static ThreadPoolExecutor getThreadPoolOrDefault(String prefixName) {
-        return defaultThreadPool(prefixName);
+    public static ThreadPoolExecutor createSimple(String prefixName) {
+        return simpleThreadPool(prefixName);
     }
 
 
-    private static ThreadPoolExecutor defaultThreadPool(String prefixName) {
+    private static ThreadPoolExecutor simpleThreadPool(String prefixName) {
         return new ThreadPoolExecutor(
                 Runtime.getRuntime().availableProcessors(),
                 Runtime.getRuntime().availableProcessors(),

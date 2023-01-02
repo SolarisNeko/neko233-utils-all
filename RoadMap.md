@@ -2,7 +2,7 @@
 
 # RoadMap
 
-### v0.1.5
+### v0.1.6
 1. [Add] Validator 注解,参数校验器. 和 spring-boot-starter-validation 差不多
 
 data

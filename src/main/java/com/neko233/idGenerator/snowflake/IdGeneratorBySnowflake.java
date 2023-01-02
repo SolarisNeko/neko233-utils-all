@@ -14,21 +14,32 @@ import java.util.List;
 @Slf4j
 public class IdGeneratorBySnowflake implements IdGenerator {
 
-    public static final int RETRY_MAX_COUNT_IN_SAME_MS = 3;
+    public static final int RETRY_MAX_COUNT_IN_SAME_MS = 3; // 最大重试次数
+    public static final long DEFAULT_START_TWEPOCH_2020_01_01 = 1577808000000L; // 默认开始的 twepoch | 2020-01-01 00:00:00.000
 
     private final String businessName;
     // 10位的工作机器id
     private final long workerId;    // 工作id 10 bit
-    // 12位的序列号 | 从 0 开始 | 每一毫秒重置
+    // 开始时间, 毫秒级别的时间截
+    private final long twepoch;
+
+
+    // 12bit sequenceId | 每 1ms 重置为0
     private long sequence = 0;
+
+
+    public IdGeneratorBySnowflake(String businessName, long workerId) {
+        this(businessName, workerId, DEFAULT_START_TWEPOCH_2020_01_01);
+    }
 
     /**
      * constructor
      *
      * @param businessName 业务名称
      * @param workerId     worker ID
+     * @param twepoch      业务开始的时间戳
      */
-    public IdGeneratorBySnowflake(String businessName, long workerId) {
+    public IdGeneratorBySnowflake(String businessName, long workerId, long twepoch) {
         // sanity check for workerId
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
@@ -38,10 +49,9 @@ public class IdGeneratorBySnowflake implements IdGenerator {
 
         this.businessName = businessName;
         this.workerId = workerId;
+        this.twepoch = twepoch;
     }
 
-    // 项目开始时间, 毫秒级别的时间截
-    private final long twepoch = 1577808000000L;
 
     // 长度为5位
     private final long workerIdBits = 10L;
