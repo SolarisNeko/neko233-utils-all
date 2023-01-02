@@ -1,6 +1,5 @@
 package com.neko233.ripplex;
 
-import com.neko233.ripplex.RippleX;
 import com.neko233.ripplex.config.MeasureConfig;
 import com.neko233.ripplex.constant.AggregateType;
 import com.neko233.ripplex.pojo.User;
