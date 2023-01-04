@@ -1,11 +1,11 @@
-package com.neko233.common.close;
+package com.neko233.common.base;
 
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Closeable;
 
 @Slf4j
-public class CloseableHelper {
+public class CloseableUtils {
 
     public static void autoClose(AutoCloseable... autoCloseables) {
         for (AutoCloseable autoCloseable : autoCloseables) {

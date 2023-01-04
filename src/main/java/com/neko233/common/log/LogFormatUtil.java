@@ -1,9 +1,9 @@
 package com.neko233.common.log;
 
+import com.neko233.common.base.StringUtils;
 import com.neko233.common.file.FileUtils233;
 import com.neko233.common.regex.RegexUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;

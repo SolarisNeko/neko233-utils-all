@@ -1,7 +1,7 @@
 package com.neko233.common.pid;
 
 import com.neko233.common.pid.ProcessIdUtil;
-import org.apache.commons.lang3.StringUtils;
+import com.neko233.common.base.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 

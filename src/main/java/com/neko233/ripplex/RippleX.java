@@ -1,5 +1,6 @@
 package com.neko233.ripplex;
 
+import com.neko233.common.base.CollectionUtils;
 import com.neko233.common.reflect.ReflectUtil;
 import com.neko233.ripplex.caculator.Transformer;
 import com.neko233.ripplex.config.MeasureConfig;
@@ -7,7 +8,6 @@ import com.neko233.ripplex.constant.AggregateType;
 import com.neko233.ripplex.orm.Map2InstanceOrm;
 import com.neko233.ripplex.strategy.merge.MergeStrategy;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;

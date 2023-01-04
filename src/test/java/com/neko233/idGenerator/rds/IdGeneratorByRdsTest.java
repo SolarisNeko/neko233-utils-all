@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class IdGeneratorByRdsTest {
 
+    DataSource dataSource = DataSourceMock.createDataSource();
 
     private String createFirstBusinessName(String demo) {
         return demo + "|" + LocalDateTime.now();
@@ -28,8 +29,6 @@ public class IdGeneratorByRdsTest {
 
     @Test
     public void demo() throws Exception {
-        Properties properties = DataSourceMock.pullMysqlConfigProperties();
-        DataSource dataSource = DruidDataSourceFactory.createDataSource(properties);
 
 
         String businessName = createFirstBusinessName("demo");
@@ -46,8 +45,6 @@ public class IdGeneratorByRdsTest {
 
     @Test
     public void test2() throws Exception {
-        Properties properties = DataSourceMock.pullMysqlConfigProperties();
-        DataSource dataSource = DruidDataSourceFactory.createDataSource(properties);
 
         IdGeneratorEntity template = IdGeneratorEntity.builder()
                 .startId(1)
@@ -74,7 +71,6 @@ public class IdGeneratorByRdsTest {
 
     @Test
     public void test_multiThread() throws Exception {
-        DataSource dataSource = DataSourceMock.createDataSource();
 
         String businessName = createFirstBusinessName("test_multiThread");
         IdGenerator demoIdGenerator = new IdGeneratorByRds(businessName, dataSource);
@@ -102,7 +98,6 @@ public class IdGeneratorByRdsTest {
 
     @Test
     public void test_singleGenerateSpeedInCache() throws Exception {
-        DataSource dataSource = DataSourceMock.createDataSource();
 
         String businessName = createFirstBusinessName("test_speed_in_single_cache");
         IdGenerator demoIdGenerator = new IdGeneratorByRds(businessName, dataSource, 10_0000, true);
@@ -120,8 +115,6 @@ public class IdGeneratorByRdsTest {
 
     @Test
     public void test_batchGenerateSpeed() throws Exception {
-        DataSource dataSource = DataSourceMock.createDataSource();
-
 
         String businessName = createFirstBusinessName("test_speed_in_single_cache");
         IdGenerator demoIdGenerator = new IdGeneratorByRds(businessName, dataSource, 10_0000, true);

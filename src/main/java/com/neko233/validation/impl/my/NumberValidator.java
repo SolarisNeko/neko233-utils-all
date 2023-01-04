@@ -2,7 +2,7 @@ package com.neko233.validation.impl.my;
 
 import com.neko233.validation.ValidateApi;
 import com.neko233.validation.annotation.ValidateNumber;
-import org.apache.commons.lang3.StringUtils;
+import com.neko233.common.base.StringUtils;
 
 /**
  * ValidateNumber Validator

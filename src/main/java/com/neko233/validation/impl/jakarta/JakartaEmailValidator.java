@@ -2,7 +2,7 @@ package com.neko233.validation.impl.jakarta;
 
 import com.neko233.validation.ValidateApi;
 import jakarta.validation.constraints.Email;
-import org.apache.commons.lang3.StringUtils;
+import com.neko233.common.base.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

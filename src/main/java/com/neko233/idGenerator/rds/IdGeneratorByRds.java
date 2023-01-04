@@ -1,6 +1,6 @@
 package com.neko233.idGenerator.rds;
 
-import com.neko233.common.close.CloseableHelper;
+import com.neko233.common.base.CloseableUtils;
 import com.neko233.idGenerator.IdGenerator;
 import com.neko233.idGenerator.IdGeneratorException;
 import lombok.extern.slf4j.Slf4j;
@@ -170,7 +170,7 @@ public class IdGeneratorByRds implements IdGenerator {
 
             return false;
         } finally {
-            CloseableHelper.autoClose(connection, ps);
+            CloseableUtils.autoClose(connection, ps);
         }
         return true;
     }

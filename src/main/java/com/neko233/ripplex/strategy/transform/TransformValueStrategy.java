@@ -1,7 +1,7 @@
 package com.neko233.ripplex.strategy.transform;
 
 import com.neko233.ripplex.exception.RippleException;
-import org.apache.commons.lang3.StringUtils;
+import com.neko233.common.base.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

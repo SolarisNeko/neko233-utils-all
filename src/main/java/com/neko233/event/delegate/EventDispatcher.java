@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.neko233.common.base.CollectionUtils;
+import com.neko233.common.base.StringUtils;
 
 import java.util.Collections;
 import java.util.Map;
