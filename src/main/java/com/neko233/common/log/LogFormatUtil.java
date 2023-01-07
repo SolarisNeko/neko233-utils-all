@@ -1,6 +1,6 @@
 package com.neko233.common.log;
 
-import com.neko233.common.base.StringUtils;
+import com.neko233.common.base.StringUtils233;
 import com.neko233.common.file.FileUtils233;
 import com.neko233.common.regex.RegexUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -85,7 +85,7 @@ public class LogFormatUtil {
      * @return 根据 logFormat, 自动解析 line, 返回映射结果 Map
      */
     public static Map<String, String> lineFormatMapping(String line, List<String> keywordTemplateList, String toSplitRegexExpression, boolean isNeedTranslate) {
-        if (StringUtils.isBlank(line)) {
+        if (StringUtils233.isBlank(line)) {
             return new HashMap<>(0);
         }
 
@@ -103,7 +103,7 @@ public class LogFormatUtil {
 
         for (int start = 0; start < contentList.size(); start++) {
             String content = contentList.get(start);
-            if (StringUtils.isBlank(content)) {
+            if (StringUtils233.isBlank(content)) {
                 continue;
             }
 
@@ -149,7 +149,7 @@ public class LogFormatUtil {
 
     @NotNull
     private static String generateRegexSplitExpression(String logFormat, List<String> keywordTemplates) {
-        if (StringUtils.isBlank(logFormat)) {
+        if (StringUtils233.isBlank(logFormat)) {
             return "";
         }
         String newRegexList = Optional.ofNullable(keywordTemplates)
@@ -158,7 +158,7 @@ public class LogFormatUtil {
                 .map(RegexUtil::convertOriginalRegex)
                 .collect(Collectors.joining("|"));
         List<String> clearanceList = Arrays.stream(logFormat.split(newRegexList))
-                .filter(StringUtils::isNotEmpty)
+                .filter(StringUtils233::isNotEmpty)
                 .distinct()
                 .sorted(regexSorting())
                 .collect(Collectors.toList());

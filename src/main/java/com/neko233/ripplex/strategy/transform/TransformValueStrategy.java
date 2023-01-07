@@ -1,7 +1,7 @@
 package com.neko233.ripplex.strategy.transform;
 
 import com.neko233.ripplex.exception.RippleException;
-import com.neko233.common.base.StringUtils;
+import com.neko233.common.base.StringUtils233;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -14,7 +14,7 @@ public interface TransformValueStrategy {
 
     static Object transform(Class returnType, Object value) {
         String valueString = String.valueOf(value);
-        if (StringUtils.isBlank(valueString) || valueString.equals("null")) {
+        if (StringUtils233.isBlank(valueString) || valueString.equals("null")) {
             return null;
         }
         switch (returnType.getName()) {

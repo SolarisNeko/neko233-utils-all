@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class FileTreeUtil {
+public class FileTreeUtils {
 
     /**
      * 线性化文件树， Tree -> List

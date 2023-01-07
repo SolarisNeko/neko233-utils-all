@@ -5,7 +5,7 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-utils-all</artifactId>
-    <version>0.1.8</version>
+    <version>0.2.0</version>
 
 
     <name>neko233-utils-all</name>
@@ -21,6 +21,10 @@
         <developer>
             <name>SolarisNeko</name>
             <url>https://github.com/SolarisNeko</url>
+        </developer>
+        <developer>
+            <name>Emmett Woo</name>
+            <url>https://github.com/Emmettwoo</url>
         </developer>
     </developers>
 
@@ -109,18 +113,24 @@
             <version>31.0-jre</version>
         </dependency>
 
-        <!-- Apache | util maybe large and I can't use too more -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.33</version>
+        </dependency>
+
+        <!-- Apache | 比较通用, 还是保留了 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
-            <scope>test</scope>
+<!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>4.4</version>
-            <scope>test</scope>
+<!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

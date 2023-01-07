@@ -1,6 +1,6 @@
 package com.neko233.counter.impl;
 
-import com.neko233.common.base.CollectionUtils;
+import com.neko233.common.base.CollectionUtils233;
 import com.neko233.counter.CounterApi;
 import com.neko233.counter.CounterData;
 import com.neko233.sql.SqlTemplate;
@@ -62,7 +62,7 @@ public class CounterApiByRds implements CounterApi {
             });
 
             scheduler.scheduleAtFixedRate(() -> {
-                if (CollectionUtils.isEmpty(queue)) {
+                if (CollectionUtils233.isEmpty(queue)) {
                     return;
                 }
                 List<CounterData> tempList = new ArrayList<>();

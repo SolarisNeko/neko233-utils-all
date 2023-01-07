@@ -2,9 +2,9 @@ package com.neko233.common.base;
 
 import java.util.Collection;
 
-public class CollectionUtils {
+public class CollectionUtils233 {
 
-    private CollectionUtils() {
+    private CollectionUtils233() {
     }
 
     public static boolean isEmpty(final Collection<?> collection) {

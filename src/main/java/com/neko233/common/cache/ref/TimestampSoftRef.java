@@ -1,17 +1,16 @@
 package com.neko233.common.cache.ref;
 
-import org.jetbrains.annotations.Nullable;
 
-import java.lang.ref.WeakReference;
+import java.lang.ref.SoftReference;
 
 /**
  * @author SolarisNeko on 2022-12-12
  **/
-public class TimeWeakRef<V> extends WeakReference<V> {
+public class TimestampSoftRef<V> extends SoftReference<V> {
 
     private volatile long visitMs;
 
-    public TimeWeakRef(V data) {
+    public TimestampSoftRef(V data) {
         super(data);
         this.visitMs = System.currentTimeMillis();
     }
@@ -20,12 +19,11 @@ public class TimeWeakRef<V> extends WeakReference<V> {
         return visitMs;
     }
 
-    private TimeWeakRef<V> refreshTime() {
+    private TimestampSoftRef<V> refreshTime() {
         visitMs = System.currentTimeMillis();
         return this;
     }
 
-    @Nullable
     @Override
     public V get() {
         refreshTime();

@@ -5,7 +5,7 @@ import com.neko233.common.cache.AbstractCache;
 import com.neko233.common.cache.Cache;
 import com.neko233.common.cache.FlushListener;
 import com.neko233.common.cache.metrics.CacheMetrics;
-import com.neko233.common.cache.ref.TimeWeakRef;
+import com.neko233.common.cache.ref.TimestampSoftRef;
 
 import java.util.List;
 import java.util.Map;
@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
  *
  * @author SolarisNeko on 2022-12-12
  **/
-public class LruFifoCache<K, V> extends AbstractCache<K, V> implements Cache<K, V> {
+public class LruCache<K, V> extends AbstractCache<K, V> {
 
     // data
-    private final ConcurrentMap<K, TimeWeakRef<V>> cacheMap = new ConcurrentHashMap<>();
+    private final ConcurrentMap<K, TimestampSoftRef<V>> cacheMap = new ConcurrentHashMap<>();
     // listener
     private final List<FlushListener<K, V>> flushListenerList = new CopyOnWriteArrayList<>();
     /**
@@ -31,7 +31,7 @@ public class LruFifoCache<K, V> extends AbstractCache<K, V> implements Cache<K, 
      */
     private final ScheduledExecutorService evictionScheduler = Executors.newScheduledThreadPool(1, r -> {
         Thread thread = new Thread(r);
-        thread.setName(LruFifoCache.class.getSimpleName() + "-" + System.currentTimeMillis());
+        thread.setName(LruCache.class.getSimpleName() + "-" + System.currentTimeMillis());
         return thread;
     });
     // invalidate settings
@@ -44,7 +44,7 @@ public class LruFifoCache<K, V> extends AbstractCache<K, V> implements Cache<K, 
     /**
      * Constructor
      */
-    public LruFifoCache() {
+    public LruCache() {
         evictionScheduler.scheduleAtFixedRate(() -> {
             // 刷盘
             flush();
@@ -52,7 +52,7 @@ public class LruFifoCache<K, V> extends AbstractCache<K, V> implements Cache<K, 
             // invalidate
             long nowMs = System.currentTimeMillis();
             Set<K> toInvalidateKeys = cacheMap.entrySet().stream().filter(entry -> {
-                TimeWeakRef<V> value = entry.getValue();
+                TimestampSoftRef<V> value = entry.getValue();
                 if (value == null) {
                     return true;
                 }
@@ -65,13 +65,13 @@ public class LruFifoCache<K, V> extends AbstractCache<K, V> implements Cache<K, 
     }
 
 
-    private V getByMetrics(TimeWeakRef<V> vTimeWeakRef) {
-        if (vTimeWeakRef == null) {
+    private V getByMetrics(TimestampSoftRef<V> vTimestampSoftRef) {
+        if (vTimestampSoftRef == null) {
             this.cacheMetrics.addMissCount(1);
             return null;
         }
         this.cacheMetrics.addHitCount(1);
-        return vTimeWeakRef.get();
+        return vTimestampSoftRef.get();
     }
 
 
@@ -133,7 +133,7 @@ public class LruFifoCache<K, V> extends AbstractCache<K, V> implements Cache<K, 
 
     @Override
     public Cache<K, V> put(K key, V value) {
-        cacheMap.put(key, new TimeWeakRef<>(value));
+        cacheMap.put(key, new TimestampSoftRef<>(value));
         return this;
     }
 
@@ -167,8 +167,8 @@ public class LruFifoCache<K, V> extends AbstractCache<K, V> implements Cache<K, 
 
     @Override
     public V get(K key) {
-        TimeWeakRef<V> vTimeWeakRef = cacheMap.get(key);
-        return getByMetrics(vTimeWeakRef);
+        TimestampSoftRef<V> vTimestampSoftRef = cacheMap.get(key);
+        return getByMetrics(vTimestampSoftRef);
     }
 
     @Override
@@ -208,7 +208,7 @@ public class LruFifoCache<K, V> extends AbstractCache<K, V> implements Cache<K, 
 
     @Override
     public V getOrCreate(K key, V newValue) {
-        TimeWeakRef<V> valueRef = cacheMap.get(key);
+        TimestampSoftRef<V> valueRef = cacheMap.get(key);
         if (valueRef == null) {
             this.put(key, newValue);
             return newValue;

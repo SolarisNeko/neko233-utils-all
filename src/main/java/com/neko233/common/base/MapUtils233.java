@@ -2,9 +2,9 @@ package com.neko233.common.base;
 
 import java.util.Map;
 
-public class MapUtils {
+public class MapUtils233 {
 
-    private MapUtils() {
+    private MapUtils233() {
     }
 
     public static boolean isEmpty(final Map<?, ?> map) {

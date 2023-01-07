@@ -1,7 +1,6 @@
 package com.neko233.common.pid;
 
-import com.neko233.common.pid.ProcessIdUtil;
-import com.neko233.common.base.StringUtils;
+import com.neko233.common.base.StringUtils233;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,7 +14,7 @@ public class ProcessIdUtilTest {
     public void test() {
         String processId = ProcessIdUtil.getProcessId();
 
-        Assert.assertTrue(StringUtils.isNotBlank(processId));
+        Assert.assertTrue(StringUtils233.isNotBlank(processId));
     }
 
 }

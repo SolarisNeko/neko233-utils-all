@@ -4,8 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.Closeable;
 
+/**
+ * close must success, if error no one can help you..
+ */
 @Slf4j
-public class CloseableUtils {
+public class CloseableUtils233 {
 
     public static void autoClose(AutoCloseable... autoCloseables) {
         for (AutoCloseable autoCloseable : autoCloseables) {

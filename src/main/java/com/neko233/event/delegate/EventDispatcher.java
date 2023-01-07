@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import com.neko233.common.base.CollectionUtils;
-import com.neko233.common.base.StringUtils;
+import com.neko233.common.base.CollectionUtils233;
+import com.neko233.common.base.StringUtils233;
 
 import java.util.Collections;
 import java.util.Map;
@@ -63,7 +63,7 @@ public class EventDispatcher implements DispatcherApi {
 
     private void notifyAllObserver(String key, Object data) {
         Set<EventListener> eventListeners = getObserverList(key);
-        if (CollectionUtils.isEmpty(eventListeners)) {
+        if (CollectionUtils233.isEmpty(eventListeners)) {
             return;
         }
 
@@ -123,7 +123,7 @@ public class EventDispatcher implements DispatcherApi {
      */
     @Override
     public synchronized EventDispatcher unregisterAll(String eventKey) {
-        if (StringUtils.isBlank(eventKey)) {
+        if (StringUtils233.isBlank(eventKey)) {
             return this;
         }
         dispatcherMap.remove(eventKey);
@@ -164,7 +164,7 @@ public class EventDispatcher implements DispatcherApi {
      * @return 管理器
      */
     private Set<EventListener> getObserverList(String key) {
-        if (StringUtils.isBlank(key)) {
+        if (StringUtils233.isBlank(key)) {
             return null;
         }
         return dispatcherMap.get(key);

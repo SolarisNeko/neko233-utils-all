@@ -1,7 +1,7 @@
 package com.neko233.i18n.impl;
 
-import com.neko233.common.base.PropertiesUtils;
-import com.neko233.common.base.StringUtils;
+import com.neko233.common.base.PropertiesUtils233;
+import com.neko233.common.base.StringUtils233;
 import com.neko233.i18n.I18nApi;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -23,12 +23,12 @@ public class I18nApiByFile implements I18nApi {
     @Override
     public Properties load(String i18nName, String fullPathName) {
         Properties i18nProp;
-        if (StringUtils.isNotBlank(fullPathName)) {
+        if (StringUtils233.isNotBlank(fullPathName)) {
             isFromClassPath = false;
-            i18nProp = PropertiesUtils.loadProperties(fullPathName, isFromClassPath);
+            i18nProp = PropertiesUtils233.loadProperties(fullPathName, isFromClassPath);
         } else {
             isFromClassPath = true;
-            i18nProp = PropertiesUtils.loadProperties(i18nName, isFromClassPath);
+            i18nProp = PropertiesUtils233.loadProperties(i18nName, isFromClassPath);
         }
         this.currentProperties = Optional.ofNullable(i18nProp).orElse(new Properties());
         return i18nProp;

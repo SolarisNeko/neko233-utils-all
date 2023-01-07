@@ -2,7 +2,7 @@ package com.neko233.validation.impl.my;
 
 import com.neko233.validation.ValidateApi;
 import com.neko233.validation.annotation.ValidateNumber;
-import com.neko233.common.base.StringUtils;
+import com.neko233.common.base.StringUtils233;
 
 /**
  * ValidateNumber Validator
@@ -35,7 +35,7 @@ public class NumberValidator implements ValidateApi<ValidateNumber, Number> {
 
     @Override
     public String getReason(ValidateNumber annotation, Number fieldValue) {
-        if (StringUtils.isNotBlank(annotation.tips())) {
+        if (StringUtils233.isNotBlank(annotation.tips())) {
             return annotation.tips();
         }
         return String.format("Your number is not in constraint. min = %s, max = %s, your value = %s",

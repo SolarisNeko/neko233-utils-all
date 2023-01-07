@@ -9,13 +9,13 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Slf4j
-public class PropertiesUtils {
+public class PropertiesUtils233 {
 
-    private PropertiesUtils() {
+    private PropertiesUtils233() {
     }
 
     public static Properties loadProperties(String justFileName) {
-        if (StringUtils.isBlank(justFileName)) {
+        if (StringUtils233.isBlank(justFileName)) {
             return new Properties();
         }
         if (justFileName.startsWith("/")) {
@@ -33,7 +33,7 @@ public class PropertiesUtils {
         InputStream is = null;
         if (isFromClassPath) {
             try {
-                is = PropertiesUtils.class.getResourceAsStream(fileOrFullPathName);
+                is = PropertiesUtils233.class.getResourceAsStream(fileOrFullPathName);
             } catch (Exception e) {
                 log.warn("Can not load resource from classpath =  " + fileOrFullPathName, e);
             }
@@ -56,7 +56,7 @@ public class PropertiesUtils {
         } catch (Exception e) {
             log.error("Exception occurred while loading " + fileOrFullPathName, e);
         } finally {
-            CloseableUtils.autoClose(is);
+            CloseableUtils233.autoClose(is);
         }
 
         return properties;

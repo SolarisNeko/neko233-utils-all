@@ -3,48 +3,35 @@ package com.neko233.common.base;
 
 import java.util.Locale;
 
-public class StringUtils {
+public class StringUtils233 {
 
-    private StringUtils() {
+    private StringUtils233() {
     }
 
     /**
-     * Represents a failed index search.
      * 没找到的 index
-     *
-     * @since 0.1.8
      */
     public static final int INDEX_NOT_FOUND = -1;
 
     /**
-     * A String for a space character.
      * 空格
-     *
-     * @since 0.1.8
      */
     public static final String SPACE = " ";
 
     /**
-     * The empty String {@code ""}.
      * 空字符串
-     *
-     * @since 0.1.8
      */
     public static final String EMPTY = "";
 
     /**
      * A String for linefeed LF ("\n").
      * 换行
-     *
-     * @since 0.1.8
      */
     public static final String LF = "\n";
 
     /**
      * carriage return CR ("\r").
      * 回车
-     *
-     * @since 0.1.8
      */
     public static final String CR = "\r";
 
@@ -182,7 +169,7 @@ public class StringUtils {
      * @since 2.0
      */
     public static String substringBetween(final String targetString, final String openStr, final String closeStr) {
-        if (ObjectUtils.isAnyNull(targetString, openStr, closeStr)) {
+        if (ObjectUtils233.isAnyNull(targetString, openStr, closeStr)) {
             return null;
         }
         final int start = targetString.indexOf(openStr);

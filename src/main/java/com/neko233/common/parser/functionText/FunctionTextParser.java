@@ -1,7 +1,7 @@
 package com.neko233.common.parser.functionText;
 
 import lombok.extern.slf4j.Slf4j;
-import com.neko233.common.base.StringUtils;
+import com.neko233.common.base.StringUtils233;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author LuoHaoJun on 2022-12-27
+ * @author SolarisNeko on 2022-01-08
  **/
 @Slf4j
 public class FunctionTextParser {
@@ -21,7 +21,7 @@ public class FunctionTextParser {
      * @param content 函数内容. 例子: beRewardOnce(once,maxCount=999)
      */
     public static FunctionText parse(String content) {
-        if (StringUtils.isBlank(content)) {
+        if (StringUtils233.isBlank(content)) {
             return null;
         }
 

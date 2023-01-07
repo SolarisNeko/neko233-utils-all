@@ -1,6 +1,6 @@
 package com.neko233.i18n;
 
-import com.neko233.common.base.MapUtils;
+import com.neko233.common.base.MapUtils233;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -34,7 +34,7 @@ public interface I18nApi {
      */
     default String get(String key) {
         Map<String, String> map = get(Collections.singleton(key));
-        if (MapUtils.isEmpty(map)) {
+        if (MapUtils233.isEmpty(map)) {
             return null;
         }
         return map.get(key);
