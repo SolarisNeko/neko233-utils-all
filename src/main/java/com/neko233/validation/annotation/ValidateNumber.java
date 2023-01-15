@@ -5,9 +5,6 @@ import jakarta.validation.Constraint;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(
-        validatedBy = {}
-)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidateNumber {

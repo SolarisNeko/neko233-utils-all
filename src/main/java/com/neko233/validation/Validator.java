@@ -1,7 +1,7 @@
 package com.neko233.validation;
 
 
-import com.neko233.common.reflect.ReflectUtil;
+import com.neko233.common.reflect.ReflectUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -83,7 +83,7 @@ public class Validator {
         if (fieldValidateApiMap != null) {
             return;
         }
-        List<Field> allFields = ReflectUtil.getAllFieldsRecursive(build);
+        List<Field> allFields = ReflectUtils.getAllFieldsRecursive(build);
 
         Map<Field, List<ValidateApi>> fieldValidateMap = new HashMap<>();
         for (Field field : allFields) {

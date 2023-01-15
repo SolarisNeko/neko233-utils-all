@@ -5,7 +5,7 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-utils-all</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 
 
     <name>neko233-utils-all</name>
@@ -329,8 +329,8 @@
                 <version>3.8.1</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>9</source>
+                    <target>9</target>
 
                     <!--                    <source>1.8</source>-->
                     <!--                    <target>1.8</target>-->

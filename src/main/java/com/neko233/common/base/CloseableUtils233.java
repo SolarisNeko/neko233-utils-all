@@ -10,7 +10,7 @@ import java.io.Closeable;
 @Slf4j
 public class CloseableUtils233 {
 
-    public static void autoClose(AutoCloseable... autoCloseables) {
+    public static void close(AutoCloseable... autoCloseables) {
         for (AutoCloseable autoCloseable : autoCloseables) {
             if (autoCloseable == null) {
                 return;
@@ -23,7 +23,7 @@ public class CloseableUtils233 {
         }
     }
 
-    public static void autoClose(Closeable... autoCloseables) {
+    public static void close(Closeable... autoCloseables) {
         for (AutoCloseable autoCloseable : autoCloseables) {
             if (autoCloseable == null) {
                 return;

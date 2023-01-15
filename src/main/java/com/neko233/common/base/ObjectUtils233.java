@@ -2,7 +2,6 @@ package com.neko233.common.base;
 
 public class ObjectUtils233 {
 
-
     public static boolean allNotNull(Object... objects) {
         for (Object o : objects) {
             if (o == null) {

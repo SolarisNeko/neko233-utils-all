@@ -6,13 +6,13 @@
 <dependency>
    <groupId>com.neko233</groupId>
    <artifactId>neko233-utils-all</artifactId>
-   <version>0.2.0</version>
+   <version>0.3.0</version>
 </dependency>
 ```
 
 ## Gradle
 ```kotlin
-implementation("com.neko233:neko233-utils-all:0.2.0")
+implementation("com.neko233:neko233-utils-all:0.3.0")
 ```
 
 定位: 开箱即用的常用包依赖.

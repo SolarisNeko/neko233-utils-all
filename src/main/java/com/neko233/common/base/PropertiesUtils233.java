@@ -56,7 +56,7 @@ public class PropertiesUtils233 {
         } catch (Exception e) {
             log.error("Exception occurred while loading " + fileOrFullPathName, e);
         } finally {
-            CloseableUtils233.autoClose(is);
+            CloseableUtils233.close(is);
         }
 
         return properties;

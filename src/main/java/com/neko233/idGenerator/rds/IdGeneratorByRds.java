@@ -170,7 +170,7 @@ public class IdGeneratorByRds implements IdGenerator {
 
             return false;
         } finally {
-            CloseableUtils233.autoClose(connection, ps);
+            CloseableUtils233.close(connection, ps);
         }
         return true;
     }
