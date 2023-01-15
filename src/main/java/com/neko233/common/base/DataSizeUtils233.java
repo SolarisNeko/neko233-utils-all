@@ -12,7 +12,7 @@ public class DataSizeUtils233 {
 
 
     // level 作为次方值
-    private static final BiDirectionalMap<Integer, String> levelToSizeMap = new BiDirectionalMap<>() {{
+    private static final BiDirectionalMap<Integer, String> levelToSizeMap = new BiDirectionalMap<Integer, String>() {{
         put(1, DataSizePool.Byte);
         put(2, DataSizePool.KB);
         put(3, DataSizePool.MB);

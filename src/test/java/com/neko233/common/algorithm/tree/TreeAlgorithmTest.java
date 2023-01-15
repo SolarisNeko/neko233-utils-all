@@ -14,20 +14,20 @@ public class TreeAlgorithmTest {
 
     @Test
     public void test1() {
-        List<TreeNode233<String>> simpleTreeNode233s = new ArrayList<>() {{
-            SimpleTreeNode233<String> build1 = new SimpleTreeNode233<>() {{
+        List<TreeNode233<String>> simpleTreeNode233s = new ArrayList<TreeNode233<String>>() {{
+            SimpleTreeNode233<String> build1 = new SimpleTreeNode233<String>() {{
                 guid(1L);
                 setNodeId(1);
                 setParentId(0);
                 setData("neko-1");
             }};
-            TreeNode233<String> build2 = new SimpleTreeNode233<>() {{
+            TreeNode233<String> build2 = new SimpleTreeNode233<String>() {{
                 guid(2L);
                 setNodeId(11);
                 setParentId(1);
                 setData("neko-1-1");
             }};
-            TreeNode233<String> build3 = new SimpleTreeNode233<>() {{
+            TreeNode233<String> build3 = new SimpleTreeNode233<String>() {{
                 guid(3L);
                 setNodeId(12);
                 setParentId(1);

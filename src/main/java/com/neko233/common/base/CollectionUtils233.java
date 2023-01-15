@@ -21,9 +21,14 @@ public class CollectionUtils233 {
 
 
     public static <T> Collection<T> addAll(List<T> es, Enumeration<T> networkInterfaces) {
-        Iterator<T> iterator = networkInterfaces.asIterator();
-        while (iterator.hasNext()) {
-            es.add(iterator.next());
+        if (networkInterfaces == null) {
+            return es;
+        }
+        if (es == null) {
+            es = new ArrayList<>();
+        }
+        while (networkInterfaces.hasMoreElements()) {
+            es.add(networkInterfaces.nextElement());
         }
         return es;
     }

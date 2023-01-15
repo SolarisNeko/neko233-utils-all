@@ -6,6 +6,7 @@ import com.neko233.common.exception.IORuntimeException;
 import com.neko233.common.exception.UtilException;
 import com.neko233.common.network.dto.UserPassAuthenticator;
 
+import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
@@ -832,9 +833,9 @@ public class NetUtils233 {
 		final Attributes attributes = JndiUtils233.getAttributes(uri, attrNames);
 
 		final List<String> infos = new ArrayList<>();
-		Iterator<? extends Attribute> iterator = attributes.getAll().asIterator();
-		while (iterator.hasNext()) {
-			Attribute attribute = iterator.next();
+		NamingEnumeration<? extends Attribute> enumeration = attributes.getAll();
+		while (enumeration.hasMoreElements()) {
+			Attribute attribute = enumeration.nextElement();
 			try {
 				infos.add((String) attribute.get());
 			} catch (NamingException ignore) {
