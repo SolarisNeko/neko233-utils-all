@@ -11,6 +11,7 @@ import java.net.InetAddress;
  * 当前主机的信息。
  */
 public class HostInfo implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	private final String HOST_NAME;

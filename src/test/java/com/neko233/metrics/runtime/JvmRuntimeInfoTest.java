@@ -1,0 +1,33 @@
+package com.neko233.metrics.runtime;
+
+import com.neko233.common.base.DataSizeUtils233;
+import org.junit.Test;
+
+public class JvmRuntimeInfoTest {
+
+    JvmRuntimeInfo jvmRuntimeInfo = new JvmRuntimeInfo();
+
+    @Test
+    public void getMaxMemory() {
+        long getMaxMemory = jvmRuntimeInfo.getMaxMemory();
+//        System.out.println(DataSizeUtils233.toHumanFormatByByte(getMaxMemory));
+    }
+
+    @Test
+    public void getTotalMemory() {
+        long getTotalMemory = jvmRuntimeInfo.getTotalMemory();
+//        System.out.println(DataSizeUtils233.toHumanFormatByByte(getTotalMemory));
+    }
+
+    @Test
+    public void getFreeMemory() {
+        long getFreeMemory = jvmRuntimeInfo.getFreeMemory();
+//        System.out.println(DataSizeUtils233.toHumanFormatByByte(getFreeMemory));
+    }
+
+    @Test
+    public void getUsableMemory() {
+        long getUsableMemory = jvmRuntimeInfo.getUsableMemory();
+//        System.out.println(DataSizeUtils233.toHumanFormatByByte(getUsableMemory));
+    }
+}

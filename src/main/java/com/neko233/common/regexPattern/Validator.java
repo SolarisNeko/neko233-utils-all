@@ -3,7 +3,7 @@ package com.neko233.common.regexPattern;
 import com.google.common.base.Objects;
 import com.neko233.common.base.*;
 import com.neko233.common.business.CreditCodeUtil;
-import com.neko233.common.business.IdcardUtil;
+import com.neko233.common.business.IdCardForChinaUtils;
 
 import java.net.MalformedURLException;
 import java.time.LocalDateTime;
@@ -730,7 +730,7 @@ public class Validator {
 	 * @return 是否为有效身份证号码
 	 */
 	public static boolean isCitizenId(CharSequence value) {
-		return IdcardUtil.isValidCard(String.valueOf(value));
+		return IdCardForChinaUtils.isValidCard(String.valueOf(value));
 	}
 
 	/**

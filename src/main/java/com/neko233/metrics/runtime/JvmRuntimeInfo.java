@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author looly
  */
-public class RuntimeInfo implements Serializable {
+public class JvmRuntimeInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

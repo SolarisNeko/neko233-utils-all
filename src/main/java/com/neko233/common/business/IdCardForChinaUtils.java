@@ -24,7 +24,7 @@ import java.util.Objects;
  * @author Looly
  * @since 3.0.4
  */
-public class IdcardUtil {
+public class IdCardForChinaUtils {
 
     /**
      * 中国公民身份证号码最小长度。
@@ -152,7 +152,7 @@ public class IdcardUtil {
      * @return 15位身份编码
      */
     public static String convert18To15(String idCard) {
-        if (StringUtils233.isNotBlank(idCard) && IdcardUtil.isValidCard18(idCard)) {
+        if (StringUtils233.isNotBlank(idCard) && IdCardForChinaUtils.isValidCard18(idCard)) {
             return idCard.substring(0, 6) + idCard.substring(8, idCard.length() - 1);
         }
         return idCard;
@@ -733,11 +733,11 @@ public class IdcardUtil {
          * @param idcard 身份证号码
          */
         public Idcard(String idcard) {
-            this.provinceCode = IdcardUtil.getProvinceCodeByIdCard(idcard);
-            this.cityCode = IdcardUtil.getCityCodeByIdCard(idcard);
-            this.birthDate = IdcardUtil.getBirthDate(idcard);
-            this.gender = IdcardUtil.getGenderByIdCard(idcard);
-            this.age = IdcardUtil.getAgeByIdCard(idcard);
+            this.provinceCode = IdCardForChinaUtils.getProvinceCodeByIdCard(idcard);
+            this.cityCode = IdCardForChinaUtils.getCityCodeByIdCard(idcard);
+            this.birthDate = IdCardForChinaUtils.getBirthDate(idcard);
+            this.gender = IdCardForChinaUtils.getGenderByIdCard(idcard);
+            this.age = IdCardForChinaUtils.getAgeByIdCard(idcard);
         }
 
         /**

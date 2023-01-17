@@ -2,11 +2,10 @@ package com.neko233.common.base;
 
 import org.joda.time.DateTime;
 
-import java.time.LocalDateTime;
-import java.time.Year;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * 优先以 java-8 的 java.time 为标准, 该日期工具主要做补充 & 方便
@@ -43,15 +42,63 @@ public class DateTimeUtils233 {
      * @return LocalDateTime
      */
     public static LocalDateTime parse(String datetimeText, String pattern) {
-        return LocalDateTime.parse(datetimeText, DateTimeFormatter.ofPattern(pattern));
+        if (StringUtils233.isBlank(datetimeText)) {
+            throw new IllegalArgumentException("your dateTime is blank!");
+        }
+        if (StringUtils233.isBlank(pattern)) {
+            throw new IllegalArgumentException("your pattern is blank!");
+        }
+        List<String> strings = StringUtils233.splitTrim(pattern, " ");
+        DateTimeFormatter dtPattern = DateTimeFormatter.ofPattern(pattern);
+        if (strings.size() == 1) {
+            if (pattern.contains("HH")) {
+                return LocalTime.parse(datetimeText, dtPattern).atDate(LocalDate.now());
+            }
+            if (pattern.contains("yyyy")) {
+                return LocalDate.parse(datetimeText, dtPattern).atStartOfDay();
+            }
+        }
+
+
+        List<String> dateTimeStr = StringUtils233.splitTrim(datetimeText, " ");
+        if (dateTimeStr.size() == 1) {
+            return LocalDateTime.parse(datetimeText + " 00:00:00", dtPattern);
+        }
+        return LocalDateTime.parse(datetimeText, dtPattern);
     }
 
+
+    /**
+     * DateTime -> String
+     *
+     * @param dateTime 日期
+     * @param pattern  格式
+     * @return datetime String
+     */
+    public static String toString(LocalDateTime dateTime, String pattern) {
+        return dateTime.format(DateTimeFormatter.ofPattern(pattern));
+    }
+
+
+    /**
+     * 获取毫秒数, 当前时区
+     *
+     * @param dateTime 给定时间
+     * @return 日期
+     */
     public static long getMs(LocalDateTime dateTime) {
-        return dateTime.toEpochSecond(ZoneOffset.of(ZoneOffset.systemDefault().getId()));
+        return dateTime.toEpochSecond(OffsetDateTime.now().getOffset()) * 1000;
     }
 
+    /**
+     * 获取毫秒数, 当前时区
+     *
+     * @param dateTime   给定时间
+     * @param zoneOffset 时区偏移
+     * @return 日期
+     */
     public static long getMs(LocalDateTime dateTime, ZoneOffset zoneOffset) {
-        return dateTime.toEpochSecond(zoneOffset);
+        return dateTime.toEpochSecond(zoneOffset) * 1000;
     }
 
     /**
@@ -66,31 +113,31 @@ public class DateTimeUtils233 {
         if (otherDt == null) {
             otherDt = now();
         }
-        return betweenAge(getMs(birthdayDt), getMs(otherDt));
+        return age(getMs(birthdayDt), getMs(otherDt));
     }
 
 
     /**
      * 计算相对于dateToCompare的年龄，长用于计算指定生日在某年的年龄
      *
-     * @param birthday      生日
-     * @param dateToCompare 需要对比的日期
+     * @param birthdayMs 生日
+     * @param otherMs    需要对比的日期
      * @return 年龄
      */
-    protected static int betweenAge(long birthday, long dateToCompare) {
-        if (birthday > dateToCompare) {
+    protected static int age(long birthdayMs, long otherMs) {
+        if (birthdayMs > otherMs) {
             throw new IllegalArgumentException("Birthday is after dateToCompare!");
         }
 
         final Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(dateToCompare);
+        cal.setTimeInMillis(otherMs);
 
         final int year = cal.get(Calendar.YEAR);
         final int month = cal.get(Calendar.MONTH);
         final int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
         final boolean isLastDayOfMonth = dayOfMonth == cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        cal.setTimeInMillis(birthday);
+        cal.setTimeInMillis(birthdayMs);
         int age = year - cal.get(Calendar.YEAR);
 
         final int monthBirth = cal.get(Calendar.MONTH);

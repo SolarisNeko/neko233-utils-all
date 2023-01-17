@@ -4,7 +4,10 @@ import com.neko233.common.regexPattern.MatcherApi;
 import com.neko233.common.regexPattern.PatternPool;
 import com.neko233.common.regexPattern.RegexPool;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegexUtils233 {
@@ -114,5 +117,53 @@ public class RegexUtils233 {
         return pattern.matcher(content).find();
     }
 
+
+
+    /**
+     * 获得匹配正则表达式的内容
+     *
+     * @param allContent        字符串
+     * @param regex             正则表达式
+     * @param isCaseInsensitive 是否忽略大小写，true忽略大小写，false大小写敏感
+     * @return 匹配正则表达式的字符串，组成的List
+     */
+    public static List<String> getMatchList(final String allContent,
+                                            final String regex,
+                                            final boolean isCaseInsensitive) {
+        List<String> result = new ArrayList<>();
+        Pattern pattern = null;
+        // 是否大小写敏感
+        if (isCaseInsensitive) {
+            pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        } else {
+            pattern = Pattern.compile(regex);
+        }
+        // 指定要匹配的字符串
+        Matcher matcher = pattern.matcher(allContent);
+        // 此处find（）每次被调用后，会偏移到下一个匹配
+        while (matcher.find()) {
+            // 获取当前匹配的值
+            result.add(matcher.group());
+        }
+        return result;
+    }
+
+    /**
+     * 将 String 中, 正则会被转义的部分, 进行提前转义处理.
+     * 仅限部分. 无法涵盖所有.
+     * <p>
+     * 避免正则当作语法处理.
+     *
+     * @param originalText 原始文本
+     * @return 处理后的正则
+     */
+    public static String convertTextForNotRegex(String originalText) {
+        return originalText
+                .replace("$", "\\$")
+                .replace("{", "\\{")
+                .replace("}", "\\}")
+                .replace("-", "\\-")
+                ;
+    }
 
 }

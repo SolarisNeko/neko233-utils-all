@@ -1,4 +1,4 @@
-package com.neko233.metrics;
+package com.neko233.metrics.jvm;
 
 import com.neko233.common.base.SystemUtils233;
 
@@ -8,6 +8,7 @@ import java.io.Serializable;
  * JVM 信息
  */
 public class JvmInfo implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private final String JAVA_VM_NAME = SystemUtils233.get("java.vm.name", false);

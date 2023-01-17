@@ -1,8 +1,8 @@
 package com.neko233.common.log;
 
+import com.neko233.common.base.RegexUtils233;
 import com.neko233.common.base.StringUtils233;
 import com.neko233.common.file.FileUtils233;
-import com.neko233.common.regex.RegexUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 
@@ -155,7 +155,7 @@ public class LogFormatUtil {
         String newRegexList = Optional.ofNullable(keywordTemplates)
                 .orElse(new ArrayList<>())
                 .stream()
-                .map(RegexUtil::convertOriginalRegex)
+                .map(RegexUtils233::convertTextForNotRegex)
                 .collect(Collectors.joining("|"));
         List<String> clearanceList = Arrays.stream(logFormat.split(newRegexList))
                 .filter(StringUtils233::isNotEmpty)
