@@ -10,12 +10,12 @@ public class PrefixThreadFactory implements ThreadFactory {
     private final String prefix;
     private final AtomicInteger counter = new AtomicInteger(1);
 
-    public static PrefixThreadFactory create(String prefix) {
-        return new PrefixThreadFactory(prefix);
-    }
-
     public PrefixThreadFactory(String prefix) {
         this.prefix = prefix;
+    }
+
+    public static PrefixThreadFactory create(String prefix) {
+        return new PrefixThreadFactory(prefix);
     }
 
     @Override

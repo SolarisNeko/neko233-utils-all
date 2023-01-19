@@ -1,24 +1,24 @@
-package com.neko233.common.adug;
+package com.neko233.common.idus;
 
 import java.util.Collection;
 import java.util.Collections;
 
 /**
- * ADUG = Add / Delete / Update / Get
+ * 增删改查 <br>
  * all API is OOP
  *
  * @author SolarisNeko on 2023-01-05
  **/
-public interface AdugApi<T> {
+public interface IdusApi<T> {
 
     /**
      * add
      */
-    default boolean add(T item) {
-        return add(Collections.singleton(item));
+    default boolean insert(T item) {
+        return insert(Collections.singleton(item));
     }
 
-    boolean add(Collection<T> item);
+    boolean insert(Collection<T> item);
 
 
     /**
@@ -45,11 +45,11 @@ public interface AdugApi<T> {
     /**
      * get
      */
-    default boolean get(T item) {
-        return get(Collections.singleton(item));
+    default boolean select(T item) {
+        return select(Collections.singleton(item));
     }
 
-    boolean get(Collection<T> item);
+    boolean select(Collection<T> item);
 
 
 }

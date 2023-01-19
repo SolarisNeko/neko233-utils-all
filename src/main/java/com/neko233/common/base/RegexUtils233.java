@@ -102,6 +102,7 @@ public class RegexUtils233 {
         final Pattern pattern = PatternPool.get(regex, Pattern.DOTALL);
         return contains(pattern, content);
     }
+
     /**
      * 指定内容中是否有表达式匹配的内容
      *
@@ -116,7 +117,6 @@ public class RegexUtils233 {
         }
         return pattern.matcher(content).find();
     }
-
 
 
     /**

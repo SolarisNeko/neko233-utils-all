@@ -5,7 +5,7 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-utils-all</artifactId>
-    <version>0.3.1</version>
+    <version>0.3.2</version>
 
 
     <name>neko233-utils-all</name>
@@ -231,9 +231,9 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.3.0</version>
+                <!-- just my code & pom.xml other dependency -->
                 <configuration>
                     <descriptorRefs>
-                        <!--                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
                         <descriptorRef>project</descriptorRef>
                     </descriptorRefs>
                     <archive>

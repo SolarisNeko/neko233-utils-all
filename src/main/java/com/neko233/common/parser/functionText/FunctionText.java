@@ -14,12 +14,12 @@ import java.util.Map;
 @Builder
 public class FunctionText {
 
-    public static void main(String[] args) {
-        new FunctionText();
-    }
-
     private String functionName;
     private List<String> metadata;
     private Map<String, String> kv;
+
+    public static void main(String[] args) {
+        new FunctionText();
+    }
 
 }

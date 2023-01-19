@@ -15,6 +15,20 @@ public class Loader {
     private static boolean ignoreTCL = false;
     private static boolean HAS_GET_CLASS_LOADER_PERMISSION = false;
 
+    static {
+
+        HAS_GET_CLASS_LOADER_PERMISSION = (Boolean) AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
+            public Boolean run() {
+                try {
+                    AccessController.checkPermission(new RuntimePermission("getClassLoader"));
+                    return true;
+                } catch (SecurityException var2) {
+                    return false;
+                }
+            }
+        });
+    }
+
     public Loader() {
     }
 
@@ -77,19 +91,5 @@ public class Loader {
                 return Class.forName(clazz);
             }
         }
-    }
-
-    static {
-
-        HAS_GET_CLASS_LOADER_PERMISSION = (Boolean) AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
-            public Boolean run() {
-                try {
-                    AccessController.checkPermission(new RuntimePermission("getClassLoader"));
-                    return true;
-                } catch (SecurityException var2) {
-                    return false;
-                }
-            }
-        });
     }
 }

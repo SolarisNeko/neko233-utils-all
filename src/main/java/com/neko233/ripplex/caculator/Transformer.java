@@ -1,7 +1,7 @@
 package com.neko233.ripplex.caculator;
 
 
-import com.neko233.common.reflect.ReflectUtils;
+import com.neko233.common.reflect.ReflectUtils233;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +18,7 @@ public class Transformer {
         Map<String, Object> dataMap = new HashMap<>();
         // group by Column
         for (String groupColumn : groupColumnNames) {
-            Object value = ReflectUtils.getValueByField(obj, groupColumn);
+            Object value = ReflectUtils233.getValueByField(obj, groupColumn);
             if (value == null) {
                 continue;
             }
@@ -26,7 +26,7 @@ public class Transformer {
         }
         // aggregate Column
         for (String aggColumnName : aggColumnNameList) {
-            Object value = ReflectUtils.getValueByField(obj, aggColumnName);
+            Object value = ReflectUtils233.getValueByField(obj, aggColumnName);
             if (value == null) {
                 continue;
             }

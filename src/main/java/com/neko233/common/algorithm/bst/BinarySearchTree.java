@@ -24,6 +24,7 @@ public class BinarySearchTree<T> implements BstApi {
 
     /**
      * BST Insert
+     *
      * @param element 元素
      */
     public void addNode(T element) {
@@ -78,7 +79,6 @@ public class BinarySearchTree<T> implements BstApi {
                 ? comparator.compare(e1, e2)
                 : ((Comparable<T>) e1).compareTo(e2);
     }
-
 
 
     @Override

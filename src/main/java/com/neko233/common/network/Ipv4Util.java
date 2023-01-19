@@ -7,7 +7,10 @@ import com.neko233.common.network.mask.MaskBit;
 import com.neko233.common.regexPattern.PatternPool;
 import com.neko233.common.regexPattern.Validator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 
 /**

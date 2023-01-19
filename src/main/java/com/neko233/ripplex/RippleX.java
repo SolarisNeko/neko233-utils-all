@@ -1,7 +1,7 @@
 package com.neko233.ripplex;
 
 import com.neko233.common.base.CollectionUtils233;
-import com.neko233.common.reflect.ReflectUtils;
+import com.neko233.common.reflect.ReflectUtils233;
 import com.neko233.ripplex.caculator.Transformer;
 import com.neko233.ripplex.config.MeasureConfig;
 import com.neko233.ripplex.constant.AggregateType;
@@ -173,7 +173,7 @@ public class RippleX {
     }
 
     private boolean rememberAndSetConfigOptions() {
-        List<Field> allColumns = ReflectUtils.getAllFieldsRecursive(schema);
+        List<Field> allColumns = ReflectUtils233.getAllFieldsRecursive(schema);
         if (CollectionUtils233.isEmpty(allColumns)) {
             return false;
         }
@@ -219,7 +219,7 @@ public class RippleX {
     private List<String> getColumnValueStrList(Object data, List<String> columnList) {
         List<String> valueStrings = new ArrayList<>();
         for (String col : columnList) {
-            Object valueByField = ReflectUtils.getValueByField(data, col);
+            Object valueByField = ReflectUtils233.getValueByField(data, col);
             valueStrings.add(String.valueOf(valueByField));
         }
         return valueStrings;

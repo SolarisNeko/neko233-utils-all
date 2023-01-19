@@ -3,6 +3,7 @@ package com.neko233.common.base;
 
 import com.neko233.validation.annotation.Nullable;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -13,67 +14,55 @@ import java.util.stream.Collectors;
 public class StringUtils233 {
 
 
-
-    private StringUtils233() {
-    }
-
     /**
      * 没找到的 index
      */
     public static final int INDEX_NOT_FOUND = -1;
-
     /**
      * char 空格
      */
     public static final char C_SPACE = ' ';
-
     /**
      * 空格
      */
     public static final String SPACE = " ";
-
     /**
      * 空字符串
      */
     public static final String EMPTY = "";
-
     /**
      * A String for linefeed LF ("\n").
      * 换行
      */
     public static final String LF = "\n";
-
     /**
      * carriage return CR ("\r").
      * 回车
      */
     public static final String CR = "\r";
-
     /**
      * 空数组
      */
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
-
     /**
      * 最大处理字符串
      */
     private static final int MAX_HANDLE_STRING = 8192;
-
     /**
      * 字符常量：斜杠 {@code '/'}
      */
     private static final char C_SLASH = '/';
-
     /**
      * 字符常量：反斜杠 {@code '\\'}
      */
     private static final char C_BACKSLASH = '\\';
-
     /**
      * 字符串常量：空 JSON {@code "{}"}
      */
     private static final String EMPTY_JSON = "{}";
 
+    private StringUtils233() {
+    }
 
     public static boolean isEmpty(final char... cs) {
         return isEmpty(new String(cs));
@@ -121,6 +110,101 @@ public class StringUtils233 {
      */
     public static boolean isNotBlank(final CharSequence cs) {
         return !isBlank(cs);
+    }
+
+
+    /**
+     * 首字母大写
+     *
+     * @param content 文本
+     * @return aaa -> Aaa
+     */
+    public static String firstWordUpperCase(String content) {
+        if (StringUtils.isBlank(content)) {
+            return content;
+        }
+        if (content.length() == 1) {
+            return content.toUpperCase();
+        }
+        return content.substring(0, 1).toUpperCase() + content.substring(1);
+    }
+
+    /**
+     * 首字母小写
+     *
+     * @param content 文本
+     * @return AAa -> aAa
+     */
+    public static String firstWordLowerCase(String content) {
+        if (StringUtils.isBlank(content)) {
+            return content;
+        }
+        if (content.length() == 1) {
+            return content.toLowerCase();
+        }
+        return content.substring(0, 1).toLowerCase() + content.substring(1);
+    }
+
+
+    /**
+     * 转换成 Big Camel（大驼峰）的 Upper Case 版本!
+     *
+     * @return SystemUser -> SYSTEM_USER
+     */
+    public static String toBigCamelCaseUpper(String name) {
+        StringBuilder builder = new StringBuilder();
+        char[] chars = name.toCharArray();
+        if (chars.length == 0) {
+            return name;
+        }
+
+        // 首字母不处理
+        builder.append(chars[0]);
+        // [1, n] 字母, 遇到大写, 进行大驼峰处理
+        for (int index = 1; index < chars.length; index++) {
+            char aChar = chars[index];
+            final boolean upperCase = Character.isUpperCase(aChar);
+            if (upperCase) {
+                // is Upper Case
+                builder.append("_").append(aChar);
+            } else {
+                // is Lower Case
+                final char upperChar = Character.toUpperCase(aChar);
+                builder.append(upperChar);
+            }
+        }
+        return builder.toString();
+    }
+
+    /**
+     * 转换成 Big Camel（大驼峰）的 lower case 版本!
+     *
+     * @return SystemUser -> system_user
+     */
+    public static String toBigCamelCaseLower(String name) {
+        StringBuilder builder = new StringBuilder();
+        // 转化成 char[] 流
+        char[] chars = name.toCharArray();
+        if (chars.length == 0) {
+            return name;
+        }
+        // 首字母不处理
+        builder.append(Character.toLowerCase(chars[0]));
+        // [1, n] 字母, 遇到大写, 进行大驼峰处理
+        for (int index = 1; index < chars.length; index++) {
+            char aChar = chars[index];
+            boolean upperCase = Character.isUpperCase(aChar);
+            if (upperCase) {
+                // Upper Case
+                builder.append("_")
+                        .append(Character.toLowerCase(aChar));
+            } else {
+                // Lower Case
+                char upperChar = Character.toLowerCase(aChar);
+                builder.append(upperChar);
+            }
+        }
+        return builder.toString();
     }
 
     public static int length(final CharSequence cs) {
@@ -230,10 +314,7 @@ public class StringUtils233 {
      */
     public static String splitTrimThenJoin(String s, String separator) {
         String notNullStr = Optional.of(s).orElse("");
-        return Arrays.stream(notNullStr.split(separator))
-                .map(String::trim)
-                .filter(StringUtils233::isNotBlank)
-                .collect(Collectors.joining(separator));
+        return Arrays.stream(notNullStr.split(separator)).map(String::trim).filter(StringUtils233::isNotBlank).collect(Collectors.joining(separator));
     }
 
     /**
@@ -294,14 +375,12 @@ public class StringUtils233 {
     }
 
     public static void appendByPrintStyle(StringBuilder builder, String key, Object value) {
-        builder.append(key)
-                .append(value)
-                .append("\n");
+        builder.append(key).append(value).append("\n");
     }
 
 
     public static String format(String strPattern, Object... argArray) {
-        return format(strPattern, EMPTY_JSON, argArray);
+        return formatByPattern(strPattern, EMPTY_JSON, argArray);
     }
 
     /**
@@ -318,7 +397,7 @@ public class StringUtils233 {
      * @param argArray    参数列表
      * @return 结果
      */
-    public static String format(String strPattern, String placeHolder, Object... argArray) {
+    public static String formatByPattern(String strPattern, String placeHolder, Object... argArray) {
         if (StringUtils233.isBlank(strPattern) || StringUtils233.isBlank(placeHolder) || ArrayUtils233.isEmpty(argArray)) {
             return strPattern;
         }
@@ -467,16 +546,14 @@ public class StringUtils233 {
         if (str == null) {
             return new ArrayList<>();
         }
-        return Arrays.stream(str.split(split))
-                .map(String::trim)
-                .collect(Collectors.toList());
+        return Arrays.stream(str.split(split)).map(String::trim).collect(Collectors.toList());
     }
 
     /**
      * public static String subPre(String startIp, int lastDotIndex) {
      * 切割指定位置之前部分的字符串
      *
-     * @param string         字符串
+     * @param string      字符串
      * @param subPreIndex 切割到的位置（不包括）
      * @return 切割后的剩余的前半部分字符串
      */
@@ -623,5 +700,6 @@ public class StringUtils233 {
         }
         return stringBuilder.toString();
     }
+
 
 }

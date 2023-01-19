@@ -11,12 +11,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
-public class RandomUtil {
+public class RandomUtils233 {
 
     /**
      * 用于随机选的数字
@@ -239,7 +239,7 @@ public class RandomUtil {
      * @return 随机数
      */
     public static double randomDouble(double min, double max, int scale, RoundingMode roundingMode) {
-        return NumberUtil.round(randomDouble(min, max), scale, roundingMode).doubleValue();
+        return NumberUtils233.round(randomDouble(min, max), scale, roundingMode).doubleValue();
     }
 
     /**
@@ -260,7 +260,7 @@ public class RandomUtil {
      * @return 随机数
      */
     public static double randomDouble(int scale, RoundingMode roundingMode) {
-        return NumberUtil.round(randomDouble(), scale, roundingMode).doubleValue();
+        return NumberUtils233.round(randomDouble(), scale, roundingMode).doubleValue();
     }
 
     /**
@@ -283,7 +283,7 @@ public class RandomUtil {
      * @return 随机数
      */
     public static double randomDouble(double limit, int scale, RoundingMode roundingMode) {
-        return NumberUtil.round(randomDouble(limit), scale, roundingMode).doubleValue();
+        return NumberUtils233.round(randomDouble(limit), scale, roundingMode).doubleValue();
     }
 
     /**
@@ -292,7 +292,7 @@ public class RandomUtil {
      * @return 随机数
      */
     public static BigDecimal randomBigDecimal() {
-        return NumberUtil.toBigDecimal(getRandom().nextDouble());
+        return NumberUtils233.toBigDecimal(getRandom().nextDouble());
     }
 
     /**
@@ -302,7 +302,7 @@ public class RandomUtil {
      * @return 随机数
      */
     public static BigDecimal randomBigDecimal(BigDecimal limit) {
-        return NumberUtil.toBigDecimal(getRandom().nextDouble(limit.doubleValue()));
+        return NumberUtils233.toBigDecimal(getRandom().nextDouble(limit.doubleValue()));
     }
 
     /**
@@ -313,7 +313,7 @@ public class RandomUtil {
      * @return 随机数
      */
     public static BigDecimal randomBigDecimal(BigDecimal min, BigDecimal max) {
-        return NumberUtil.toBigDecimal(getRandom().nextDouble(min.doubleValue(), max.doubleValue()));
+        return NumberUtils233.toBigDecimal(getRandom().nextDouble(min.doubleValue(), max.doubleValue()));
     }
 
     /**
@@ -413,7 +413,7 @@ public class RandomUtil {
         }
 
         List<T> result = new ArrayList<>();
-		final int[] randomCountIndexList = randomInts(needCount);
+        final int[] randomCountIndexList = randomInts(needCount);
         for (int e : randomCountIndexList) {
             result.add(source.get(e));
         }

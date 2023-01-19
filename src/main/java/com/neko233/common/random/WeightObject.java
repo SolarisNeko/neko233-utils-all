@@ -8,13 +8,13 @@ package com.neko233.common.random;
  */
 public class WeightObject<T> {
     /**
-     * 对象
-     */
-    private T obj;
-    /**
      * 权重
      */
     private final double weight;
+    /**
+     * 对象
+     */
+    private T obj;
 
     /**
      * 构造

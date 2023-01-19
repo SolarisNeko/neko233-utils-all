@@ -19,7 +19,7 @@ public class KvTemplate {
     public KvTemplate(String kvTemplate) {
         this.kvTemplate = kvTemplate;
     }
-    
+
     public static KvTemplate builder(String kvTemplate) {
         if (StringUtils.isBlank(kvTemplate)) {
             throw new IllegalArgumentException("your kv template is blank !");

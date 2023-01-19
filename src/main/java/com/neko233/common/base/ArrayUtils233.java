@@ -88,9 +88,9 @@ public class ArrayUtils233 {
     /**
      * 交换数组中两个位置的值. 基本类型
      *
-     * @param baseArray  数组对象
-     * @param index1 位置1
-     * @param index2 位置2
+     * @param baseArray 数组对象
+     * @param index1    位置1
+     * @param index2    位置2
      * @return 交换后的数组，与传入数组为同一对象
      */
     public static Object swap(Object baseArray, int index1, int index2) {

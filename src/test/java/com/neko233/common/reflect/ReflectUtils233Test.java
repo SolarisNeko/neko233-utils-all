@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class ReflectUtilsTest {
+public class ReflectUtils233Test {
 
     public int demo() {
         return 0;
@@ -14,7 +14,7 @@ public class ReflectUtilsTest {
 
     @Test
     public void test1() throws InvocationTargetException, IllegalAccessException {
-        Method demo = ReflectUtils.getMethodByName(ReflectUtilsTest.class, "demo");
+        Method demo = ReflectUtils233.getMethodByName(ReflectUtils233Test.class, "demo");
         Object invoke = demo.invoke(this);
         Assert.assertEquals(0, invoke);
     }

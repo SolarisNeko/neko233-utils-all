@@ -1,7 +1,6 @@
 package com.neko233.common.algorithm.tree;
 
 import lombok.extern.slf4j.Slf4j;
-import lombok.var;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.*;

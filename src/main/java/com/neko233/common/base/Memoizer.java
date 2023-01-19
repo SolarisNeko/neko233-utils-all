@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 
 /**
- * 备忘录
+ * 备忘录 with TTL. 存储相同的输入
  * A memoized function stores the output corresponding to some set of specific
  * inputs. Subsequent calls with remembered inputs return the remembered result
  * rather than recalculating it.
@@ -25,7 +25,7 @@ public final class Memoizer {
     }
 
     private static long queryExpirationConfig() {
-        return TimeUnit.MILLISECONDS.toNanos(GlobalConfig.get(GlobalConfig.OSHI_UTIL_MEMOIZER_EXPIRATION, 300));
+        return TimeUnit.MILLISECONDS.toNanos(BaseGlobalConfig233.get(BaseGlobalConfig233.OSHI_UTIL_MEMOIZER_EXPIRATION, 300));
     }
 
     /**
@@ -39,13 +39,10 @@ public final class Memoizer {
      * Store a supplier in a delegate function to be computed once, and only again
      * after time to live (ttl) has expired.
      *
-     * @param <T>
-     *            The type of object supplied
-     * @param original
-     *            The {@link java.util.function.Supplier} to memoize
-     * @param ttlNanos
-     *            Time in nanoseconds to retain calculation. If negative, retain
-     *            indefinitely.
+     * @param <T>      The type of object supplied
+     * @param original The {@link java.util.function.Supplier} to memoize
+     * @param ttlNanos Time in nanoseconds to retain calculation. If negative, retain
+     *                 indefinitely.
      * @return A memoized version of the supplier
      */
     public static <T> Supplier<T> memoize(Supplier<T> original, long ttlNanos) {
@@ -78,13 +75,13 @@ public final class Memoizer {
     /**
      * Store a supplier in a delegate function to be computed only once.
      *
-     * @param <T>
-     *            The type of object supplied
-     * @param original
-     *            The {@link java.util.function.Supplier} to memoize
+     * @param <T>      The type of object supplied
+     * @param original The {@link java.util.function.Supplier} to memoize
      * @return A memoized version of the supplier
      */
     public static <T> Supplier<T> memoize(Supplier<T> original) {
         return memoize(original, -1L);
     }
+
+
 }

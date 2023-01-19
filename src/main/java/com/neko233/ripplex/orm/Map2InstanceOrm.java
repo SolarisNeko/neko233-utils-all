@@ -1,6 +1,6 @@
 package com.neko233.ripplex.orm;
 
-import com.neko233.common.reflect.ReflectUtils;
+import com.neko233.common.reflect.ReflectUtils233;
 import com.neko233.ripplex.strategy.transform.TransformValueStrategy;
 import lombok.extern.slf4j.Slf4j;
 import com.neko233.common.base.CollectionUtils233;
@@ -22,7 +22,7 @@ public class Map2InstanceOrm {
     }
 
     public static <T> T orm(Map<String, Object> dataMap, Class<?> schema) {
-        List<Field> fieldList = ReflectUtils.getAllFieldsRecursive(schema);
+        List<Field> fieldList = ReflectUtils233.getAllFieldsRecursive(schema);
         if (CollectionUtils233.isEmpty(fieldList)) {
             return null;
         }

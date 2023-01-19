@@ -14,6 +14,7 @@ public class TextSimilarUtil {
 
     /**
      * Levenshtein 距离, 是编辑距离的一种。指2个字串之间，由1个String转化成另1个String, 所需的最少编辑操作次数。
+     *
      * @param a 内容a
      * @param b 内容b
      * @return 相似度'比例 [0, 1]

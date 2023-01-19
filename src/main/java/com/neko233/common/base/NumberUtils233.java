@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
-public class NumberUtil {
+public class NumberUtils233 {
 
 
     public static BigDecimal round(Number number, int scale, RoundingMode roundingMode) {

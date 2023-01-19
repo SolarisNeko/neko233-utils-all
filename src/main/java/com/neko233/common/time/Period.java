@@ -25,10 +25,10 @@ public interface Period {
     }
 
     static PeriodLocation calculatePeriod(long currentMs,
-                                                 long allStartMs,
-                                                 long allEndMs,
-                                                 Number interval,
-                                                 TimeUnit timeUnit) {
+                                          long allStartMs,
+                                          long allEndMs,
+                                          Number interval,
+                                          TimeUnit timeUnit) {
         long periodMs = timeUnit.toMillis(interval.longValue());
 
         long middleMs = allEndMs - allStartMs;

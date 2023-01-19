@@ -11,6 +11,7 @@ public class JvmInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    // if use Profiler to execute, will error
     private final String JAVA_VM_NAME = SystemUtils233.get("java.vm.name", false);
     private final String JAVA_VM_VERSION = SystemUtils233.get("java.vm.version", false);
     private final String JAVA_VM_VENDOR = SystemUtils233.get("java.vm.vendor", false);

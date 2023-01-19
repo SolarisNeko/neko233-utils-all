@@ -1,6 +1,6 @@
 package com.neko233.common.business;
 
-import com.neko233.common.base.RandomUtil;
+import com.neko233.common.base.RandomUtils233;
 import com.neko233.common.base.RegexUtils233;
 import com.neko233.common.base.StringUtils233;
 import com.neko233.common.regexPattern.PatternPool;
@@ -103,15 +103,15 @@ public class CreditCodeUtil {
 
         //
         for (int i = 0; i < 2; i++) {
-            int num = RandomUtil.randomInt(BASE_CODE_ARRAY.length - 1);
+            int num = RandomUtils233.randomInt(BASE_CODE_ARRAY.length - 1);
             buf.append(Character.toUpperCase(BASE_CODE_ARRAY[num]));
         }
         for (int i = 2; i < 8; i++) {
-            int num = RandomUtil.randomInt(10);
+            int num = RandomUtils233.randomInt(10);
             buf.append(BASE_CODE_ARRAY[num]);
         }
         for (int i = 8; i < 17; i++) {
-            int num = RandomUtil.randomInt(BASE_CODE_ARRAY.length - 1);
+            int num = RandomUtils233.randomInt(BASE_CODE_ARRAY.length - 1);
             buf.append(BASE_CODE_ARRAY[num]);
         }
 

@@ -46,7 +46,7 @@ public final class PackageScanner {
     static public Set<Class<?>> listClazz(String packageName, boolean recursive) {
         return listClazz(packageName, recursive, (clazz -> true));
     }
-    
+
     static public Set<Class<?>> listClazz(String packageName, boolean recursive, ClassFilter filter) {
 
         if (packageName == null ||

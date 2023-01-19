@@ -225,7 +225,8 @@ public class MathUtils233 {
 
     /**
      * power 次方方
-     * @param number 数字
+     *
+     * @param number     数字
      * @param powerLevel 平方次数
      * @return n次方
      */
