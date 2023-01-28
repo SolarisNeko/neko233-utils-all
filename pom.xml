@@ -4,17 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.neko233</groupId>
-    <artifactId>neko233-utils-all</artifactId>
+    <artifactId>neko233-toolchain</artifactId>
     <version>0.3.2</version>
 
 
-    <name>neko233-utils-all</name>
-    <url>https://github.com/SolarisNeko/neko233-utils-all/tree/main</url>
+    <name>neko233-toolchain</name>
+    <url>https://github.com/SolarisNeko/neko233-toolchain/tree/main</url>
 
     <description>
-        neko233-utils-all is used to resolve common problem.
-        用于解决常见问题.
-        开箱即用的一些工具包、依赖.
+        neko233-toolchain is used to resolve common problem.
+        基本库. 用于解决常见通用问题 and 制定 API 规范.
     </description>
 
     <developers>
@@ -29,9 +28,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/SolarisNeko/neko233-utils-all.git</connection>
-        <developerConnection>scm:git:ssh://github.com/SolarisNeko/neko233-utils-all.git</developerConnection>
-        <url>http://github.com/SolarisNeko/neko233-utils-all/tree/main</url>
+        <connection>scm:git:https://github.com/SolarisNeko/neko233-toolchain.git</connection>
+        <developerConnection>scm:git:ssh://github.com/SolarisNeko/neko233-toolchain.git</developerConnection>
+        <url>http://github.com/SolarisNeko/neko233-toolchain/tree/main</url>
     </scm>
 
     <licenses>
